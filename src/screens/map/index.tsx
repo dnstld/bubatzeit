@@ -2,7 +2,7 @@ import { View, StyleSheet, Dimensions, Animated } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Avatar, Card } from 'react-native-paper';
 
-import { data } from './mock';
+import { data } from '../../../mock';
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = width / 2;

@@ -1,10 +1,24 @@
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { PaperProvider } from 'react-native-paper';
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { Home, Map } from './src/screens';
+import { Home, Map, Clubs as Club, Details } from './src/screens';
+
+const Stack = createNativeStackNavigator();
+
+function Clubs() {
+  return (
+    <Stack.Navigator>
+      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+        <Stack.Screen name="Clubs in Berlin" component={Club} />
+        <Stack.Screen name="Details" component={Details} />
+      </Stack.Group>
+    </Stack.Navigator>
+  );
+}
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -13,6 +27,19 @@ export default function App() {
     <PaperProvider>
       <NavigationContainer>
         <Tab.Navigator>
+          <Tab.Screen
+            name="Home"
+            component={Home}
+            options={{
+              tabBarLabel: 'Home',
+              tabBarIcon: ({ color, focused }) =>
+                focused ? (
+                  <Icon name="home" color={color} size={26} />
+                ) : (
+                  <Icon name="home-outline" color={color} size={26} />
+                ),
+            }}
+          />
           <Tab.Screen
             name="Map"
             component={Map}
@@ -27,16 +54,13 @@ export default function App() {
             }}
           />
           <Tab.Screen
-            name="Home"
-            component={Home}
+            name="Clubs"
+            component={Clubs}
             options={{
-              tabBarLabel: 'Home',
-              tabBarIcon: ({ color, focused }) =>
-                focused ? (
-                  <Icon name="home" color={color} size={26} />
-                ) : (
-                  <Icon name="home-outline" color={color} size={26} />
-                ),
+              tabBarLabel: 'Clubs',
+              tabBarIcon: ({ color }) => (
+                <Icon name="format-list-bulleted" color={color} size={26} />
+              ),
             }}
           />
         </Tab.Navigator>

@@ -1,4 +1,6 @@
+import Clubs from './clubs';
+import Details from './clubs/details';
 import Home from './home';
 import Map from './map';
 
-export { Home, Map };
+export { Home, Map, Clubs, Details };
