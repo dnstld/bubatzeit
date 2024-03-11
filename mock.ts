@@ -9,6 +9,7 @@ export const data = {
   state: {
     markers: [
       {
+        id: 1,
         coordinates: {
           latitude: 52.52,
           longitude: 13.405,
@@ -24,6 +25,7 @@ export const data = {
         image: images[0],
       },
       {
+        id: 2,
         coordinates: {
           latitude: 52.4783,
           longitude: 13.3298,
@@ -40,6 +42,7 @@ export const data = {
         image: images[1],
       },
       {
+        id: 3,
         coordinates: {
           latitude: 52.53,
           longitude: 13.385,
@@ -56,6 +59,7 @@ export const data = {
         image: images[2],
       },
       {
+        id: 4,
         coordinates: {
           latitude: 52.5022,
           longitude: 13.3949,
@@ -72,6 +76,7 @@ export const data = {
         image: images[3],
       },
       {
+        id: 5,
         coordinates: {
           latitude: 52.4831,
           longitude: 13.4136,
@@ -88,6 +93,7 @@ export const data = {
         image: images[2],
       },
       {
+        id: 6,
         coordinates: {
           latitude: 52.4946,
           longitude: 13.4305,
@@ -104,6 +110,7 @@ export const data = {
         image: images[0],
       },
       {
+        id: 7,
         coordinates: {
           latitude: 52.466,
           longitude: 13.3946,
@@ -120,6 +127,7 @@ export const data = {
         image: images[3],
       },
       {
+        id: 8,
         coordinates: {
           latitude: 52.5368,
           longitude: 13.3872,
@@ -136,6 +144,7 @@ export const data = {
         image: images[2],
       },
       {
+        id: 9,
         coordinates: {
           latitude: 52.4611,
           longitude: 13.3054,
@@ -151,6 +160,7 @@ export const data = {
           'Relax and unwind at the terrace with a view in Tempelhof.',
       },
       {
+        id: 10,
         coordinates: {
           latitude: 52.509,
           longitude: 13.4395,
@@ -167,6 +177,7 @@ export const data = {
         image: images[1],
       },
       {
+        id: 11,
         coordinates: {
           latitude: 52.5254,
           longitude: 13.3695,
@@ -183,6 +194,7 @@ export const data = {
         image: images[0],
       },
       {
+        id: 12,
         coordinates: {
           latitude: 52.4838,
           longitude: 13.3499,
@@ -199,6 +211,7 @@ export const data = {
         image: images[3],
       },
       {
+        id: 13,
         coordinates: {
           latitude: 52.488,
           longitude: 13.378,
@@ -214,6 +227,7 @@ export const data = {
         image: images[0],
       },
       {
+        id: 14,
         coordinates: {
           latitude: 52.5233,
           longitude: 13.3933,
@@ -229,6 +243,7 @@ export const data = {
         image: images[2],
       },
       {
+        id: 15,
         coordinates: {
           latitude: 52.4714,
           longitude: 13.4179,
@@ -244,6 +259,7 @@ export const data = {
         image: images[3],
       },
       {
+        id: 16,
         coordinates: {
           latitude: 52.4966,
           longitude: 13.4362,
@@ -259,6 +275,7 @@ export const data = {
         image: images[0],
       },
       {
+        id: 17,
         coordinates: {
           latitude: 52.5115,
           longitude: 13.444,
@@ -274,6 +291,7 @@ export const data = {
         image: images[1],
       },
       {
+        id: 18,
         coordinates: {
           latitude: 52.5291,
           longitude: 13.4033,
@@ -289,6 +307,7 @@ export const data = {
         image: images[0],
       },
       {
+        id: 19,
         coordinates: {
           latitude: 52.4796,
           longitude: 13.3493,
@@ -304,6 +323,7 @@ export const data = {
         image: images[3],
       },
       {
+        id: 20,
         coordinates: {
           latitude: 52.52,
           longitude: 13.3784,
@@ -320,6 +340,7 @@ export const data = {
         image: images[2],
       },
       {
+        id: 21,
         coordinates: {
           latitude: 52.5387,
           longitude: 13.4171,
@@ -335,6 +356,7 @@ export const data = {
         image: images[1],
       },
       {
+        id: 22,
         coordinates: {
           latitude: 52.4662,
           longitude: 13.3233,
@@ -350,6 +372,7 @@ export const data = {
         image: images[0],
       },
       {
+        id: 23,
         coordinates: {
           latitude: 52.5013,
           longitude: 13.3938,
@@ -366,6 +389,7 @@ export const data = {
         image: images[1],
       },
       {
+        id: 24,
         coordinates: {
           latitude: 52.5353,
           longitude: 13.4205,
