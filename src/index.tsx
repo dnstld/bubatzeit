@@ -5,7 +5,7 @@ import { IconButton, PaperProvider } from 'react-native-paper';
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { Home, Map, Clubs as Club, Details } from './src/screens';
+import { Home, Map, Clubs as Club, Details } from './screens';
 
 const Stack = createNativeStackNavigator();
 
