@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { PaperProvider } from 'react-native-paper';
+import { IconButton, PaperProvider } from 'react-native-paper';
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -14,7 +14,21 @@ function Clubs() {
     <Stack.Navigator>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Clubs in Berlin" component={Club} />
-        <Stack.Screen name="Details" component={Details} />
+        <Stack.Screen
+          name="Details"
+          component={Details}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <IconButton
+                icon="close"
+                size={24}
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              />
+            ),
+          })}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );

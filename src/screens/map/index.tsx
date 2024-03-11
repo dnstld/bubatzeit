@@ -38,7 +38,6 @@ export default function Map() {
         provider={PROVIDER_GOOGLE}
         style={styles.container}
         showsUserLocation
-        tintColor="red"
       >
         {data.state.markers.map((marker, index) => {
           const scaleStyle = [

@@ -14,10 +14,8 @@ export default function Clubs({ navigation }: { navigation: any }) {
             mode="contained"
             theme={{ colors: { surfaceVariant: 'white' } }}
             onPress={() => {
-              /* 1. Navigate to the Details route with params */
               navigation.navigate('Details', {
-                itemId: 86,
-                otherParam: 'anything you want here',
+                club: item,
               });
             }}
           >
