@@ -64,6 +64,7 @@ export default function Map() {
         onSnapToItem={(index) => setSelectedItem(index)}
         containerCustomStyle={styles.scrollView}
         activeSlideAlignment="start"
+        vertical={false}
       />
     </View>
   );

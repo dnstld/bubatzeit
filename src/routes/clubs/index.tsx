@@ -3,7 +3,8 @@ import { Avatar, Card, Divider } from 'react-native-paper';
 
 import { data } from '../../../mock';
 
-export default function Clubs({ navigation }: { navigation: any }) {
+// @ts-ignore
+export default function Clubs({ route, navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
