@@ -1,5 +1,6 @@
-import { useRef, useState } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
+import { useMemo, useRef, useState } from 'react';
+import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Avatar, Card } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
@@ -13,11 +14,16 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 export default function Map() {
   const [selectedItem, setSelectedItem] = useState(0);
   const isCarrousel = useRef(null);
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const snapPoints = useMemo(() => ['75%'], []);
 
   const onMarkerSelected = (marker: any) => {};
 
+  const handleOpenBottomSheetModal = () =>
+    bottomSheetModalRef.current?.present();
+
   const renderItem = ({ item }) => (
-    <Card key={item.id}>
+    <Card key={item.id} onPress={handleOpenBottomSheetModal}>
       <Card.Title
         title={item.title}
         titleVariant="titleSmall"
@@ -66,6 +72,12 @@ export default function Map() {
         activeSlideAlignment="start"
         vertical={false}
       />
+
+      <BottomSheetModal ref={bottomSheetModalRef} snapPoints={snapPoints}>
+        <BottomSheetView style={{ flex: 1, alignItems: 'center' }}>
+          <Text>Awesome 🎉</Text>
+        </BottomSheetView>
+      </BottomSheetModal>
     </View>
   );
 }
