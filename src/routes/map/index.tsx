@@ -1,3 +1,4 @@
+import { gql, useQuery } from '@apollo/client';
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
 import { useMemo, useRef, useState } from 'react';
 import { View, StyleSheet, Dimensions, Text } from 'react-native';
@@ -6,12 +7,35 @@ import { Avatar, Card } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { data } from '../../../mock';
-
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
+const INITIAL_REGION = {
+  latitude: 52.520008,
+  longitude: 13.404954,
+  latitudeDelta: 0.3,
+  longitudeDelta: 0.3,
+};
+
+const GET_CLUBS = gql`
+  query GetClubs {
+    clubs {
+      title
+      description
+      coordinates {
+        latitude
+        longitude
+      }
+      image {
+        uri
+      }
+    }
+  }
+`;
+
 export default function Map() {
+  const { loading, error, data } = useQuery(GET_CLUBS);
+
   const [selectedItem, setSelectedItem] = useState(0);
   const isCarrousel = useRef(null);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -22,34 +46,37 @@ export default function Map() {
   const handleOpenBottomSheetModal = () =>
     bottomSheetModalRef.current?.present();
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: { item: any }) => (
     <Card key={item.id} onPress={handleOpenBottomSheetModal}>
       <Card.Title
         title={item.title}
         titleVariant="titleSmall"
         subtitle={item.description}
         subtitleVariant="bodySmall"
-        left={(props) => <Avatar.Image size={42} source={item.image!} />}
+        left={() => <Avatar.Image size={42} source={item.image!} />}
       />
     </Card>
   );
 
+  if (loading) return null;
+  if (error) return null;
+
   return (
     <View style={{ flex: 1 }}>
       <MapView
-        initialRegion={data.region}
+        initialRegion={INITIAL_REGION}
         provider={PROVIDER_GOOGLE}
         style={styles.container}
         showsUserLocation
       >
-        {data.state.markers.map((marker, index) => {
+        {data.clubs.map((club, index) => {
           return (
             <Marker
               key={index}
-              title={marker.title}
-              description={marker.description}
-              coordinate={marker.coordinates}
-              onPress={() => onMarkerSelected(marker)}
+              title={club.title}
+              description={club.description}
+              coordinate={club.coordinates}
+              onPress={() => onMarkerSelected(club)}
             >
               {selectedItem === index && styles.selected ? (
                 <Icon name="leaf-maple" color="#114232" size={42} />
@@ -63,7 +90,7 @@ export default function Map() {
 
       <Carousel
         ref={isCarrousel}
-        data={data.state.markers}
+        data={data.clubs}
         renderItem={renderItem}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}

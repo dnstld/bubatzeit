@@ -1,14 +1,31 @@
+import { useQuery, gql } from '@apollo/client';
 import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import { Avatar, Card, Divider } from 'react-native-paper';
 
-import { data } from '../../../mock';
+const GET_CLUBS = gql`
+  query GetClubs {
+    clubs {
+      id
+      title
+      description
+      image {
+        uri
+      }
+    }
+  }
+`;
 
 // @ts-ignore
-export default function Clubs({ route, navigation }) {
+export default function Clubs({ navigation }) {
+  const { loading, error, data } = useQuery(GET_CLUBS);
+
+  if (loading) return null;
+  if (error) return null;
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={data.state.markers}
+        data={data.clubs}
         renderItem={({ item, index }) => (
           <Card
             key={index}
@@ -16,7 +33,7 @@ export default function Clubs({ route, navigation }) {
             theme={{ colors: { surfaceVariant: 'white' } }}
             onPress={() => {
               navigation.navigate('Details', {
-                club: item,
+                id: item.id,
               });
             }}
           >
@@ -25,7 +42,7 @@ export default function Clubs({ route, navigation }) {
               titleVariant="titleSmall"
               subtitle={item.description}
               subtitleVariant="bodySmall"
-              left={(props) => <Avatar.Image size={42} source={item.image!} />}
+              left={() => <Avatar.Image size={42} source={item.image!} />}
             />
           </Card>
         )}
