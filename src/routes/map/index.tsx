@@ -1,13 +1,13 @@
 import { gql, useQuery } from '@apollo/client';
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
 import { useMemo, useRef, useState } from 'react';
-import { View, Dimensions, Text } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Avatar, Card } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { styles } from './styles';
+import ClubDetails from '../../components/club-details';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -20,14 +20,20 @@ const INITIAL_REGION = {
 };
 
 const GET_CLUBS = gql`
-  query GetClubs {
+  query clubs {
     clubs {
-      title
-      description
+      id
       coordinates {
         latitude
         longitude
       }
+      address {
+        street
+        postalCode
+        phoneNumber
+      }
+      title
+      description
       image {
         uri
       }
@@ -38,24 +44,27 @@ const GET_CLUBS = gql`
 export default function Map() {
   const { loading, error, data } = useQuery(GET_CLUBS);
 
-  const [selectedItem, setSelectedItem] = useState(0);
-  const isCarrousel = useRef(null);
+  const carrouselRef = useRef(null);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const [selectedCarouselItem, setSelectedCarouselItem] = useState(0);
+  const [selectedClub, setSelectedClub] = useState({});
+
   const snapPoints = useMemo(() => ['75%'], []);
 
-  const onMarkerSelected = (marker: any) => {};
-
-  const handleOpenBottomSheetModal = () =>
+  const onSelectClub = (club) => {
+    setSelectedClub(club);
     bottomSheetModalRef.current?.present();
+  };
 
-  const renderItem = ({ item }: { item: any }) => (
-    <Card key={item.id} onPress={handleOpenBottomSheetModal}>
+  const _renderItem = ({ item, index }) => (
+    <Card key={item.id} onPress={() => onSelectClub(item)}>
       <Card.Title
         title={item.title}
         titleVariant="titleSmall"
         subtitle={item.description}
         subtitleVariant="bodySmall"
-        left={() => <Avatar.Image size={42} source={item.image!} />}
+        left={() => <Avatar.Image size={42} source={item.image} />}
       />
     </Card>
   );
@@ -74,29 +83,22 @@ export default function Map() {
         {data.clubs.map((club, index) => {
           return (
             <Marker
-              key={index}
-              title={club.title}
-              description={club.description}
+              key={club.id}
               coordinate={club.coordinates}
-              onPress={() => onMarkerSelected(club)}
-            >
-              {selectedItem === index && styles.selected ? (
-                <Icon name="leaf-maple" color="#114232" size={42} />
-              ) : (
-                <Icon name="leaf-maple" color="#87A922" size={26} />
-              )}
-            </Marker>
+              onPress={() => onSelectClub(club)}
+              pinColor={selectedCarouselItem === index ? 'black' : 'lime'}
+            />
           );
         })}
       </MapView>
 
       <Carousel
-        ref={isCarrousel}
+        ref={carrouselRef}
         data={data.clubs}
-        renderItem={renderItem}
+        renderItem={_renderItem}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
-        onSnapToItem={(index) => setSelectedItem(index)}
+        onSnapToItem={(index) => setSelectedCarouselItem(index)}
         containerCustomStyle={styles.scrollView}
         activeSlideAlignment="start"
         vertical={false}
@@ -104,7 +106,7 @@ export default function Map() {
 
       <BottomSheetModal ref={bottomSheetModalRef} snapPoints={snapPoints}>
         <BottomSheetView style={{ flex: 1, alignItems: 'center' }}>
-          <Text>Awesome 🎉</Text>
+          <ClubDetails club={selectedClub} showMap={false} />
         </BottomSheetView>
       </BottomSheetModal>
     </View>

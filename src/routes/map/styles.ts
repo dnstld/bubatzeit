@@ -21,4 +21,8 @@ export const styles = StyleSheet.create({
   selected: {
     backgroundColor: 'rgba(0,100,0, 1)',
   },
+  bottomSheet: {
+    flex: 1,
+    alignItems: 'center',
+  },
 });

@@ -5,9 +5,18 @@ import { Avatar, Card, Divider } from 'react-native-paper';
 import { styles } from './styles';
 
 const GET_CLUBS = gql`
-  query GetClubs {
+  query clubs {
     clubs {
       id
+      coordinates {
+        latitude
+        longitude
+      }
+      address {
+        street
+        postalCode
+        phoneNumber
+      }
       title
       description
       image {
@@ -32,14 +41,14 @@ export default function Clubs({ navigation }) {
     <SafeAreaView style={styles.container}>
       <FlatList
         data={sortedData}
-        renderItem={({ item, index }) => (
+        renderItem={({ item }) => (
           <Card
-            key={index}
+            key={item.id}
             mode="contained"
             theme={{ colors: { surfaceVariant: 'white' } }}
             onPress={() => {
               navigation.navigate('Details', {
-                id: item.id,
+                club: item,
               });
             }}
           >

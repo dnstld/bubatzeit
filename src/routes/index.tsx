@@ -1,5 +1,5 @@
 import Clubs from './clubs';
-import Details from './clubs/details';
+import Details from './details';
 import Home from './home';
 import Map from './map';
 
