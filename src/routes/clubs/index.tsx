@@ -1,6 +1,8 @@
 import { useQuery, gql } from '@apollo/client';
-import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import { FlatList, SafeAreaView } from 'react-native';
 import { Avatar, Card, Divider } from 'react-native-paper';
+
+import { styles } from './styles';
 
 const GET_CLUBS = gql`
   query GetClubs {
@@ -22,10 +24,14 @@ export default function Clubs({ navigation }) {
   if (loading) return null;
   if (error) return null;
 
+  const sortedData = [...data.clubs].sort((a, b) =>
+    a.title.localeCompare(b.title),
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={data.clubs}
+        data={sortedData}
         renderItem={({ item, index }) => (
           <Card
             key={index}
@@ -53,9 +59,3 @@ export default function Clubs({ navigation }) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

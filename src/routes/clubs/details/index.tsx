@@ -5,6 +5,8 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Avatar, Button, Card } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { styles } from './styles';
+
 const GET_CLUB = gql`
   query GetClub($id: ID!) {
     club(id: $id) {
@@ -47,14 +49,14 @@ export default function Details({
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
       <MapView
-        region={{
+        initialRegion={{
           ...coordinates,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
         provider={PROVIDER_GOOGLE}
         showsUserLocation
-        style={{ height: 250 }}
+        style={styles.map}
       >
         <Marker coordinate={coordinates}>
           <Icon name="map-marker" color={'green'} size={48} />

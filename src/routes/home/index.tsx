@@ -1,8 +1,10 @@
 import { View, Text } from 'react-native';
 
+import { styles } from './styles';
+
 export default function Home() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.container}>
       <Text>Home</Text>
     </View>
   );

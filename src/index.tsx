@@ -6,6 +6,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PaperProvider } from 'react-native-paper';
 
 import Root from './routes/__layout';
+import { styles } from './styles';
 
 const client = new ApolloClient({
   uri: 'http://192.168.178.21:4000/',
@@ -14,7 +15,7 @@ const client = new ApolloClient({
 
 export default function App() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={styles.container}>
       <BottomSheetModalProvider>
         <PaperProvider>
           <ApolloProvider client={client}>

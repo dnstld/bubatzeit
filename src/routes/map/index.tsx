@@ -1,11 +1,13 @@
 import { gql, useQuery } from '@apollo/client';
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
 import { useMemo, useRef, useState } from 'react';
-import { View, StyleSheet, Dimensions, Text } from 'react-native';
+import { View, Dimensions, Text } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Avatar, Card } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import { styles } from './styles';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -108,26 +110,3 @@ export default function Map() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scrollView: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: 32,
-  },
-  marker: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    backgroundColor: 'rgba(0,100,0, 0.3)',
-    zIndex: 1,
-  },
-  selected: {
-    backgroundColor: 'rgba(0,100,0, 1)',
-  },
-});
