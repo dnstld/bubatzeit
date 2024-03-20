@@ -5,6 +5,7 @@ import { View, Dimensions } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Avatar, Card } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { styles } from './styles';
 import ClubDetails from '../../components/club-details';
@@ -57,14 +58,20 @@ export default function Map() {
     bottomSheetModalRef.current?.present();
   };
 
-  const _renderItem = ({ item, index }) => (
+  const onCloseBottomSheet = () => {
+    bottomSheetModalRef.current?.dismiss();
+  };
+
+  const _renderItem = ({ item }) => (
     <Card key={item.id} onPress={() => onSelectClub(item)}>
       <Card.Title
         title={item.title}
-        titleVariant="titleSmall"
-        subtitle={item.description}
+        titleStyle={{ minHeight: 0, marginBottom: 2 }}
+        subtitle={`${item.address.street}, ${item.address.postalCode}`}
+        subtitleStyle={{ minHeight: 0 }}
         subtitleVariant="bodySmall"
         left={() => <Avatar.Image size={42} source={item.image} />}
+        right={() => <Icon name="dots-vertical" size={24} />}
       />
     </Card>
   );
@@ -106,7 +113,11 @@ export default function Map() {
 
       <BottomSheetModal ref={bottomSheetModalRef} snapPoints={snapPoints}>
         <BottomSheetView style={{ flex: 1, alignItems: 'center' }}>
-          <ClubDetails club={selectedClub} showMap={false} />
+          <ClubDetails
+            club={selectedClub}
+            showMap={false}
+            bottomCta={onCloseBottomSheet}
+          />
         </BottomSheetView>
       </BottomSheetModal>
     </View>

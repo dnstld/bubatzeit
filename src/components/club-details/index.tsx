@@ -21,9 +21,14 @@ type Props = {
     image: any;
   };
   showMap?: boolean;
+  bottomCta?: () => void;
 };
 
-export default function ClubDetails({ club, showMap = true }: Props) {
+export default function ClubDetails({
+  club,
+  showMap = true,
+  bottomCta,
+}: Props) {
   const { title, address, coordinates, description, image } = club!;
 
   return (
@@ -58,8 +63,8 @@ export default function ClubDetails({ club, showMap = true }: Props) {
           <Text>{address.phoneNumber}</Text>
         </Card.Content>
         <Card.Actions>
-          <Button icon="phone" mode="contained" onPress={() => {}}>
-            Call now
+          <Button icon="close" mode="outlined" onPress={bottomCta}>
+            Close Details
           </Button>
         </Card.Actions>
       </Card>
