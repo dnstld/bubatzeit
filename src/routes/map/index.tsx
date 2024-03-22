@@ -3,11 +3,11 @@ import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
 import { useMemo, useRef, useState } from 'react';
 import { View, Dimensions } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Avatar, Card } from 'react-native-paper';
+import { Card } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { styles } from './styles';
+import ClubAvatar from '../../components/club-avatar';
 import ClubDetails from '../../components/club-details';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
@@ -64,15 +64,7 @@ export default function Map() {
 
   const _renderItem = ({ item }) => (
     <Card key={item.id} onPress={() => onSelectClub(item)}>
-      <Card.Title
-        title={item.title}
-        titleStyle={{ minHeight: 0, marginBottom: 2 }}
-        subtitle={`${item.address.street}, ${item.address.postalCode}`}
-        subtitleStyle={{ minHeight: 0 }}
-        subtitleVariant="bodySmall"
-        left={() => <Avatar.Image size={42} source={item.image} />}
-        right={() => <Icon name="dots-vertical" size={24} />}
-      />
+      <ClubAvatar title={item.title} address={item.address} />
     </Card>
   );
 

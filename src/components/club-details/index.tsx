@@ -4,6 +4,7 @@ import { Avatar, Button, Card } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { styles } from './styles';
+import ClubAvatar from '../club-avatar';
 
 type Props = {
   club: {
@@ -29,7 +30,7 @@ export default function ClubDetails({
   showMap = true,
   bottomCta,
 }: Props) {
-  const { title, address, coordinates, description, image } = club!;
+  const { title, address, coordinates } = club!;
 
   return (
     <View style={styles.container}>
@@ -51,12 +52,7 @@ export default function ClubDetails({
       )}
 
       <Card mode="contained" theme={{ colors: { surfaceVariant: 'white' } }}>
-        <Card.Title
-          title={title}
-          subtitle={description}
-          subtitleNumberOfLines={0}
-          left={() => <Avatar.Image size={42} source={image} />}
-        />
+        <ClubAvatar title={title} address={address} showDots={false} />
         <Card.Content>
           <Text>Address</Text>
           <Text>{`${address.street} ${address.postalCode}`}</Text>

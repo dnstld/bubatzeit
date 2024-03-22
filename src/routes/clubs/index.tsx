@@ -1,8 +1,9 @@
 import { useQuery, gql } from '@apollo/client';
 import { FlatList, SafeAreaView } from 'react-native';
-import { Avatar, Card, Divider } from 'react-native-paper';
+import { Card, Divider } from 'react-native-paper';
 
 import { styles } from './styles';
+import ClubAvatar from '../../components/club-avatar';
 
 const GET_CLUBS = gql`
   query clubs {
@@ -52,12 +53,10 @@ export default function Clubs({ navigation }) {
               });
             }}
           >
-            <Card.Title
+            <ClubAvatar
               title={item.title}
-              titleVariant="titleSmall"
-              subtitle={item.description}
-              subtitleVariant="bodySmall"
-              left={() => <Avatar.Image size={42} source={item.image!} />}
+              address={item.address}
+              showDots={false}
             />
           </Card>
         )}
