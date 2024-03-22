@@ -46,7 +46,7 @@ export default function Clubs({ navigation }) {
           <Card
             key={item.id}
             mode="contained"
-            theme={{ colors: { surfaceVariant: 'white' } }}
+            theme={{ roundness: 0 }}
             onPress={() => {
               navigation.navigate('Details', {
                 club: item,

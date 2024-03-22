@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Avatar, Button, Card } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Button, Card, useTheme } from 'react-native-paper';
 
 import { styles } from './styles';
 import ClubAvatar from '../club-avatar';
+import WeedSvg from '../weed-svg';
 
 type Props = {
   club: {
@@ -31,6 +31,7 @@ export default function ClubDetails({
   bottomCta,
 }: Props) {
   const { title, address, coordinates } = club!;
+  const { colors } = useTheme();
 
   return (
     <View style={styles.container}>
@@ -46,7 +47,7 @@ export default function ClubDetails({
           style={styles.map}
         >
           <Marker coordinate={coordinates}>
-            <Icon name="map-marker" color={'green'} size={48} />
+            <WeedSvg size={48} color={colors.primary} />
           </Marker>
         </MapView>
       )}

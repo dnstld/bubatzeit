@@ -23,6 +23,5 @@ export const styles = StyleSheet.create({
   },
   bottomSheet: {
     flex: 1,
-    alignItems: 'center',
   },
 });

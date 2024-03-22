@@ -3,12 +3,13 @@ import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
 import { useMemo, useRef, useState } from 'react';
 import { View, Dimensions } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Card } from 'react-native-paper';
+import { Card, useTheme } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
 
 import { styles } from './styles';
 import ClubAvatar from '../../components/club-avatar';
 import ClubDetails from '../../components/club-details';
+import WeedSvg from '../../components/weed-svg';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -52,6 +53,7 @@ export default function Map() {
   const [selectedClub, setSelectedClub] = useState({});
 
   const snapPoints = useMemo(() => ['75%'], []);
+  const { colors } = useTheme();
 
   const onSelectClub = (club) => {
     setSelectedClub(club);
@@ -85,8 +87,13 @@ export default function Map() {
               key={club.id}
               coordinate={club.coordinates}
               onPress={() => onSelectClub(club)}
-              pinColor={selectedCarouselItem === index ? 'black' : 'lime'}
-            />
+            >
+              {selectedCarouselItem === index && styles.selected ? (
+                <WeedSvg size={48} color={colors.primary} />
+              ) : (
+                <WeedSvg size={32} color={colors.secondary} />
+              )}
+            </Marker>
           );
         })}
       </MapView>
@@ -104,7 +111,7 @@ export default function Map() {
       />
 
       <BottomSheetModal ref={bottomSheetModalRef} snapPoints={snapPoints}>
-        <BottomSheetView style={{ flex: 1, alignItems: 'center' }}>
+        <BottomSheetView style={styles.bottomSheet}>
           <ClubDetails
             club={selectedClub}
             showMap={false}
