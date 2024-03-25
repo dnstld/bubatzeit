@@ -4,18 +4,23 @@ import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navig
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { ParamsList } from './type';
-import { Home, Map, Clubs as Club, Details } from '../../routes';
+import {
+  HomeScreen,
+  MapScreen,
+  ClubsScreen,
+  DetailsScreen,
+} from '../../routes';
 
 const Stack = createNativeStackNavigator();
 
-function Clubs() {
+const ClubsStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Clubs in Berlin" component={Club} />
+        <Stack.Screen name="Clubs in Berlin" component={ClubsScreen} />
         <Stack.Screen
           name="Details"
-          component={Details}
+          component={DetailsScreen}
           options={({ navigation }) => ({
             headerRight: () => (
               <IconButton
@@ -31,7 +36,36 @@ function Clubs() {
       </Stack.Group>
     </Stack.Navigator>
   );
-}
+};
+
+const MapStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+        <Stack.Screen
+          name="Map"
+          component={MapScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Details"
+          component={DetailsScreen}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <IconButton
+                icon="close"
+                size={24}
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              />
+            ),
+          })}
+        />
+      </Stack.Group>
+    </Stack.Navigator>
+  );
+};
 
 export const Tab = createMaterialBottomTabNavigator<ParamsList>();
 
@@ -40,7 +74,7 @@ export default function Root() {
     <Tab.Navigator>
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeScreen}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, focused }) =>
@@ -53,7 +87,7 @@ export default function Root() {
       />
       <Tab.Screen
         name="Map"
-        component={Map}
+        component={MapStack}
         options={{
           tabBarLabel: 'Map',
           tabBarIcon: ({ color, focused }) =>
@@ -66,7 +100,7 @@ export default function Root() {
       />
       <Tab.Screen
         name="Clubs"
-        component={Clubs}
+        component={ClubsStack}
         options={{
           tabBarLabel: 'Clubs',
           tabBarIcon: ({ color }) => (

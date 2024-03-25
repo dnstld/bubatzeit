@@ -7,7 +7,7 @@ import { Card, useTheme } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
 
 import { styles } from './styles';
-import ClubAvatar from '../../components/club-avatar';
+import CardTitle from '../../components/card-title';
 import ClubDetails from '../../components/club-details';
 import WeedSvg from '../../components/weed-svg';
 
@@ -39,36 +39,42 @@ const GET_CLUBS = gql`
       image {
         uri
       }
+      openingHours {
+        day
+        open
+        close
+      }
     }
   }
 `;
 
-export default function Map() {
+export default function MapScreen({ navigation }) {
   const { loading, error, data } = useQuery(GET_CLUBS);
 
   const carrouselRef = useRef(null);
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const [selectedCarouselItem, setSelectedCarouselItem] = useState(0);
-  const [selectedClub, setSelectedClub] = useState({});
-
-  const snapPoints = useMemo(() => ['75%'], []);
   const { colors } = useTheme();
 
-  const onSelectClub = (club) => {
-    setSelectedClub(club);
-    bottomSheetModalRef.current?.present();
+  const _renderItem = ({ item }) => {
+    return (
+      <Card
+        key={item.id}
+        onPress={() =>
+          navigation.navigate('Details', {
+            id: item.id,
+          })
+        }
+      >
+        <CardTitle
+          title={item.title}
+          subtitle={`${item.address.street}, ${item.address.postalCode}`}
+          imageUri={item.image?.uri}
+          showDots
+        />
+      </Card>
+    );
   };
-
-  const onCloseBottomSheet = () => {
-    bottomSheetModalRef.current?.dismiss();
-  };
-
-  const _renderItem = ({ item }) => (
-    <Card key={item.id} onPress={() => onSelectClub(item)}>
-      <ClubAvatar title={item.title} address={item.address} />
-    </Card>
-  );
 
   if (loading) return null;
   if (error) return null;
@@ -89,9 +95,9 @@ export default function Map() {
               onPress={() => onSelectClub(club)}
             >
               {selectedCarouselItem === index && styles.selected ? (
-                <WeedSvg size={48} color={colors.primary} />
+                <WeedSvg type="map" color={colors.primary} />
               ) : (
-                <WeedSvg size={32} color={colors.secondary} />
+                <WeedSvg type="map" size={32} color={colors.secondary} />
               )}
             </Marker>
           );
@@ -109,16 +115,6 @@ export default function Map() {
         activeSlideAlignment="start"
         vertical={false}
       />
-
-      <BottomSheetModal ref={bottomSheetModalRef} snapPoints={snapPoints}>
-        <BottomSheetView style={styles.bottomSheet}>
-          <ClubDetails
-            club={selectedClub}
-            showMap={false}
-            bottomCta={onCloseBottomSheet}
-          />
-        </BottomSheetView>
-      </BottomSheetModal>
     </View>
   );
 }

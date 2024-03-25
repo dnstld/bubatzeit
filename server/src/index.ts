@@ -15,6 +15,20 @@ const typeDefs = `#graphql
   type Image {
     uri: String
   }
+  type OpeningHours {
+    day: String
+    open: String
+    close: String
+  }
+  type Profile {
+    website: String
+    email: String
+    phone: String
+  }
+  type Groups {
+    telegram: String
+    whatsapp: String
+  }
   type Club {
     id: ID!
     coordinates: Coordinate
@@ -22,6 +36,9 @@ const typeDefs = `#graphql
     title: String
     description: String
     image: Image
+    openingHours: [OpeningHours]
+    profile: Profile
+    groups: Groups
   }
   type Query {
     clubs: [Club!]!
@@ -34,6 +51,44 @@ const images = [
   { uri: 'https://i.imgur.com/N7rlQYt.jpg' },
   { uri: 'https://i.imgur.com/UDrH0wm.jpg' },
   { uri: 'https://i.imgur.com/Ka8kNST.jpg' },
+];
+
+const openingHours = [
+  {
+    day: 'Monday',
+    open: '9:00am',
+    close: '17:30pm',
+  },
+  {
+    day: 'Tuesday',
+    open: '9:00am',
+    close: '17:30pm',
+  },
+  {
+    day: 'Wednesday',
+    open: '9:00am',
+    close: '17:30pm',
+  },
+  {
+    day: 'Thursday',
+    open: '9:00am',
+    close: '17:30pm',
+  },
+  {
+    day: 'Friday',
+    open: '9:00am',
+    close: '17:30pm',
+  },
+  {
+    day: 'Saturday',
+    open: '9:00am',
+    close: '12:30pm',
+  },
+  {
+    day: 'Sunday',
+    open: 'Closed',
+    close: 'Closed',
+  },
 ];
 
 const clubs = [
@@ -52,6 +107,16 @@ const clubs = [
     title: 'Green Leaf Lounge',
     description: 'Experience the best cannabis strains in central Berlin.',
     image: images[0],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 2,
@@ -69,6 +134,16 @@ const clubs = [
     description:
       'Find your favorite Kush varieties in the vibrant Kreuzberg district.',
     image: images[1],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 3,
@@ -86,6 +161,16 @@ const clubs = [
     description:
       'Elevate your senses with high-quality cannabis in Prenzlauer Berg.',
     image: images[2],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 4,
@@ -103,6 +188,16 @@ const clubs = [
     description:
       'Explore a green oasis with diverse cannabis options in Berlin Mitte.',
     image: images[3],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 5,
@@ -120,6 +215,16 @@ const clubs = [
     description:
       'Enjoy the relaxing ambiance and premium cannabis in Friedrichshain.',
     image: images[2],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 6,
@@ -137,6 +242,16 @@ const clubs = [
     description:
       'Discover unique herbal blends on the vibrant east side of Berlin.',
     image: images[0],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 7,
@@ -154,6 +269,16 @@ const clubs = [
     description:
       'Blend of Kreuzberg and Neukölln vibes with top-notch cannabis.',
     image: images[3],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 8,
@@ -170,6 +295,16 @@ const clubs = [
     title: 'Weißensee Weed Wonderland',
     description: 'Step into a wonderland of diverse weed options in Weißensee.',
     image: images[2],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 9,
@@ -202,6 +337,16 @@ const clubs = [
     description:
       'Unique strains await you in the Gleisdreieck urban greenhouse.',
     image: images[1],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 11,
@@ -218,6 +363,16 @@ const clubs = [
     title: 'Alexanderplatz Cannabis Corner',
     description: 'Explore a diverse selection of cannabis near Alexanderplatz.',
     image: images[0],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 12,
@@ -235,6 +390,16 @@ const clubs = [
     description:
       'Indulge in the luxury of premium marijuana in the heart of Moabit.',
     image: images[3],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 13,
@@ -251,6 +416,16 @@ const clubs = [
     title: 'Spree-side Sativa Spot',
     description: 'Enjoy Sativa strains by the Spree River in Berlin.',
     image: images[0],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 14,
@@ -267,6 +442,16 @@ const clubs = [
     title: 'Mauerpark Medley',
     description: 'A medley of cannabis options awaits you at Mauerpark.',
     image: images[2],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 15,
@@ -283,6 +468,16 @@ const clubs = [
     title: 'Neukölln Nugs Nook',
     description: 'Find your favorite nugs at the cozy Neukölln Nook.',
     image: images[3],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 16,
@@ -299,6 +494,16 @@ const clubs = [
     title: 'Warschauer Weed Wharf',
     description: 'Dock into diverse weed options at the Warschauer Wharf.',
     image: images[0],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 17,
@@ -315,6 +520,16 @@ const clubs = [
     title: 'Tiergarten THC Terrace',
     description: 'Enjoy a terrace experience with THC near Tiergarten.',
     image: images[1],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 18,
@@ -331,6 +546,16 @@ const clubs = [
     title: 'Potsdamer Platz Pot Palace',
     description: 'Discover a palace of pot varieties near Potsdamer Platz.',
     image: images[0],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 19,
@@ -347,6 +572,16 @@ const clubs = [
     title: 'Kreuzberg Kief Kingdom',
     description: 'Immerse yourself in the kingdom of kief in Kreuzberg.',
     image: images[3],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 20,
@@ -363,6 +598,16 @@ const clubs = [
     title: 'Mitte Marijuana Marketplace',
     description: 'Explore a marketplace of marijuana options in Berlin Mitte.',
     image: images[2],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 21,
@@ -379,6 +624,16 @@ const clubs = [
     title: 'Pankow Pot Paradise',
     description: 'Escape to a pot paradise in the lush greenery of Pankow.',
     image: images[1],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 22,
@@ -395,6 +650,16 @@ const clubs = [
     title: 'Marienfelde Medicated Meadow',
     description: 'Relax in the medicated meadow of Marienfelde.',
     image: images[0],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 23,
@@ -412,6 +677,16 @@ const clubs = [
     description:
       'Experience premium cannabis near historic Checkpoint Charlie.',
     image: images[1],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
   {
     id: 24,
@@ -428,6 +703,16 @@ const clubs = [
     title: 'Weißensee Weed Wholesalers',
     description: 'Wholesale weed options available in Weißensee.',
     image: images[2],
+    openingHours,
+    profile: {
+      website: 'https://denistoledo.dev/',
+      email: 'contato@denistoledo.com.br',
+      phone: '+4901744310644',
+    },
+    groups: {
+      telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
+      whatsapp: 'https://chat.whatsapp.com/CfKAeDO0pK0Ij5sn8P7a4U',
+    },
   },
 ];
 

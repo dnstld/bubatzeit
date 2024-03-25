@@ -2,14 +2,14 @@ import { Avatar, Card } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { styles } from './styles';
+import WeedSvg from '../weed-svg';
 
 type Props = {
+  type?: 'icon' | 'text';
   title: string;
-  address: {
-    street: string;
-    postalCode: string;
-  };
+  subtitle?: string;
   showDots?: boolean;
+  imageUri?: string;
 };
 
 const getInitials = (title: string) => {
@@ -21,25 +21,34 @@ const getInitials = (title: string) => {
   }
 };
 
-export default function ClubAvatar({
+export default function CardTitle({
   title,
-  address: { street, postalCode },
-  showDots = true,
+  subtitle,
+  showDots = false,
+  type = 'text',
+  imageUri = '',
 }: Props) {
   return (
     <Card.Title
       title={title}
       titleStyle={styles.title}
-      subtitle={`${street}, ${postalCode}`}
+      titleVariant="titleMedium"
+      subtitle={subtitle}
       subtitleStyle={styles.subtitle}
       subtitleVariant="bodySmall"
-      left={() => (
-        <Avatar.Text
-          size={42}
-          label={getInitials(title)}
-          labelStyle={styles.avatar}
-        />
-      )}
+      left={() =>
+        imageUri?.length > 0 ? (
+          <Avatar.Image size={42} source={{ uri: imageUri }} />
+        ) : type === 'icon' ? (
+          <Avatar.Icon size={42} icon={() => <WeedSvg size={24} />} />
+        ) : (
+          <Avatar.Text
+            size={42}
+            label={getInitials(title)}
+            labelStyle={styles.avatar}
+          />
+        )
+      }
       right={() => showDots && <Icon name="dots-vertical" size={24} />}
     />
   );

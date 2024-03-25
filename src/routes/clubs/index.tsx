@@ -3,7 +3,7 @@ import { FlatList, SafeAreaView } from 'react-native';
 import { Card, Divider } from 'react-native-paper';
 
 import { styles } from './styles';
-import ClubAvatar from '../../components/club-avatar';
+import CardTitle from '../../components/card-title';
 
 const GET_CLUBS = gql`
   query clubs {
@@ -23,12 +23,17 @@ const GET_CLUBS = gql`
       image {
         uri
       }
+      openingHours {
+        day
+        open
+        close
+      }
     }
   }
 `;
 
 // @ts-ignore
-export default function Clubs({ navigation }) {
+export default function ClubsScreen({ navigation }) {
   const { loading, error, data } = useQuery(GET_CLUBS);
 
   if (loading) return null;
@@ -49,14 +54,14 @@ export default function Clubs({ navigation }) {
             theme={{ roundness: 0 }}
             onPress={() => {
               navigation.navigate('Details', {
-                club: item,
+                id: item.id,
               });
             }}
           >
-            <ClubAvatar
+            <CardTitle
               title={item.title}
-              address={item.address}
-              showDots={false}
+              subtitle={`${item.address.street}, ${item.address.postalCode}`}
+              showDots
             />
           </Card>
         )}

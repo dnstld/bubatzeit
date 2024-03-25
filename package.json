@@ -22,6 +22,7 @@
     "@react-navigation/native-stack": "^6.9.22",
     "@types/react-native-snap-carousel": "^3.8.11",
     "expo": "~50.0.7",
+    "expo-linking": "~6.2.2",
     "expo-location": "~16.5.3",
     "expo-status-bar": "~1.11.1",
     "graphql": "^16.8.1",

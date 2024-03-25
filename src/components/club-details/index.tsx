@@ -1,9 +1,10 @@
-import { View, Text } from 'react-native';
+import { openURL } from 'expo-linking';
+import { ScrollView, View } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Button, Card, useTheme } from 'react-native-paper';
+import { Card, Divider, List, Text, useTheme } from 'react-native-paper';
 
 import { styles } from './styles';
-import ClubAvatar from '../club-avatar';
+import CardTitle from '../card-title';
 import WeedSvg from '../weed-svg';
 
 type Props = {
@@ -19,23 +20,43 @@ type Props = {
       longitude: number;
     };
     description: string;
-    image: any;
+    image: {
+      uri: string;
+    };
+    openingHours: {
+      day: string;
+      open: string;
+      close: string;
+    }[];
+    profile: {
+      website: string;
+      email: string;
+      phone: string;
+    };
+    groups: {
+      telegram: string;
+      whatsapp: string;
+    };
   };
-  showMap?: boolean;
-  bottomCta?: () => void;
 };
 
-export default function ClubDetails({
-  club,
-  showMap = true,
-  bottomCta,
-}: Props) {
-  const { title, address, coordinates } = club!;
+export default function ClubDetails({ club }: Props) {
+  const {
+    title,
+    address,
+    coordinates,
+    description,
+    image,
+    openingHours,
+    profile,
+    groups,
+  } = club;
+
   const { colors } = useTheme();
 
   return (
-    <View style={styles.container}>
-      {showMap && (
+    <ScrollView style={styles.container}>
+      <View style={styles.content}>
         <MapView
           initialRegion={{
             ...coordinates,
@@ -47,24 +68,93 @@ export default function ClubDetails({
           style={styles.map}
         >
           <Marker coordinate={coordinates}>
-            <WeedSvg size={48} color={colors.primary} />
+            <WeedSvg color={colors.primary} />
           </Marker>
         </MapView>
-      )}
 
-      <Card mode="contained" theme={{ colors: { surfaceVariant: 'white' } }}>
-        <ClubAvatar title={title} address={address} showDots={false} />
-        <Card.Content>
-          <Text>Address</Text>
-          <Text>{`${address.street} ${address.postalCode}`}</Text>
-          <Text>{address.phoneNumber}</Text>
-        </Card.Content>
-        <Card.Actions>
-          <Button icon="close" mode="outlined" onPress={bottomCta}>
-            Close Details
-          </Button>
-        </Card.Actions>
-      </Card>
-    </View>
+        <Card mode="contained" theme={{ colors: { surfaceVariant: 'white' } }}>
+          <CardTitle
+            title={title}
+            subtitle={`${address.street}, ${address.postalCode}`}
+            imageUri={image.uri}
+          />
+          <Card.Content>
+            <Text variant="titleMedium" style={styles.title}>
+              Description:
+            </Text>
+            <Text>{description}</Text>
+
+            <Divider style={styles.divider} />
+
+            <Text variant="titleMedium" style={styles.title}>
+              Contact:
+            </Text>
+            <List.Item
+              title={profile.phone}
+              onPress={() => openURL(profile.phone)}
+              left={(props) => (
+                <List.Icon {...props} style={styles.listIcon} icon="phone" />
+              )}
+            />
+            <List.Item
+              title={profile.email}
+              onPress={() => openURL(profile.email)}
+              left={(props) => (
+                <List.Icon {...props} style={styles.listIcon} icon="email" />
+              )}
+            />
+            <List.Item
+              title={profile.website}
+              onPress={() => openURL(profile.website)}
+              left={(props) => (
+                <List.Icon {...props} style={styles.listIcon} icon="web" />
+              )}
+            />
+
+            <Divider style={styles.divider} />
+
+            <Text variant="titleMedium" style={styles.title}>
+              Join our group:
+            </Text>
+            <List.Item
+              title="Telegram"
+              onPress={() => openURL(groups.telegram)}
+              left={(props) => (
+                <List.Icon {...props} style={styles.listIcon} icon="chat" />
+              )}
+            />
+            <List.Item
+              title="WhatsApp"
+              onPress={() => openURL(groups.whatsapp)}
+              left={(props) => (
+                <List.Icon {...props} style={styles.listIcon} icon="chat" />
+              )}
+            />
+
+            <Divider style={styles.divider} />
+
+            <Text variant="titleMedium" style={styles.title}>
+              Opening hours:
+            </Text>
+            <View>
+              {openingHours.map((hour, index) => (
+                <View style={styles.openingHours} key={index}>
+                  <Text
+                    variant="titleSmall"
+                    style={[styles.openingHoursText, styles.openingHoursTitle]}
+                  >
+                    {hour.day}
+                  </Text>
+                  <Text variant="bodySmall" style={styles.openingHoursText}>
+                    {hour.open}
+                  </Text>
+                  <Text style={styles.openingHoursText}>{hour.close}</Text>
+                </View>
+              ))}
+            </View>
+          </Card.Content>
+        </Card>
+      </View>
+    </ScrollView>
   );
 }
