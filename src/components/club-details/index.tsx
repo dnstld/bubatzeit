@@ -1,9 +1,10 @@
 import { openURL } from 'expo-linking';
 import { ScrollView, View } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Card, Divider, List, Text, useTheme } from 'react-native-paper';
+import { Card, Divider, List, Text } from 'react-native-paper';
 
 import { styles } from './styles';
+import { useTheme } from '../../theme';
 import CardTitle from '../card-title';
 import WeedSvg from '../weed-svg';
 

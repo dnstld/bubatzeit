@@ -1,15 +1,14 @@
 import { gql, useQuery } from '@apollo/client';
-import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { View, Dimensions } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Card, useTheme } from 'react-native-paper';
+import { Card } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
 
 import { styles } from './styles';
 import CardTitle from '../../components/card-title';
-import ClubDetails from '../../components/club-details';
 import WeedSvg from '../../components/weed-svg';
+import { useTheme } from '../../theme';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -56,16 +55,15 @@ export default function MapScreen({ navigation }) {
   const [selectedCarouselItem, setSelectedCarouselItem] = useState(0);
   const { colors } = useTheme();
 
+  const onSelectClub = (clubId: string) => {
+    navigation.navigate('Details', {
+      id: clubId,
+    });
+  };
+
   const _renderItem = ({ item }) => {
     return (
-      <Card
-        key={item.id}
-        onPress={() =>
-          navigation.navigate('Details', {
-            id: item.id,
-          })
-        }
-      >
+      <Card key={item.id} onPress={() => onSelectClub(item.id)}>
         <CardTitle
           title={item.title}
           subtitle={`${item.address.street}, ${item.address.postalCode}`}
@@ -92,7 +90,7 @@ export default function MapScreen({ navigation }) {
             <Marker
               key={club.id}
               coordinate={club.coordinates}
-              onPress={() => onSelectClub(club)}
+              onPress={() => onSelectClub(club.id)}
             >
               {selectedCarouselItem === index && styles.selected ? (
                 <WeedSvg type="map" color={colors.primary} />

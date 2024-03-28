@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Button, Card, Text, useTheme } from 'react-native-paper';
+import { Button, Card, Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { styles } from './styles';
 import CardTitle from '../../components/card-title';
+import { useTheme } from '../../theme';
 
 export default function HomeScreen() {
   const { colors } = useTheme();
