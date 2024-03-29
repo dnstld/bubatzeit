@@ -1,6 +1,6 @@
 import ClubsScreen from './clubs';
 import DetailsScreen from './details';
-import HomeScreen from './home';
 import MapScreen from './map';
+import PrimaryScreen from './primary/home';
 
-export { HomeScreen, MapScreen, ClubsScreen, DetailsScreen };
+export { PrimaryScreen, MapScreen, ClubsScreen, DetailsScreen };

@@ -10,6 +10,7 @@ type Props = {
   subtitle?: string;
   showDots?: boolean;
   imageUri?: string;
+  right?: any;
 };
 
 const getInitials = (title: string) => {
@@ -27,6 +28,7 @@ export default function CardTitle({
   showDots = false,
   type = 'text',
   imageUri = '',
+  right,
 }: Props) {
   return (
     <Card.Title
@@ -49,7 +51,11 @@ export default function CardTitle({
           />
         )
       }
-      right={() => showDots && <Icon name="dots-vertical" size={24} />}
+      right={
+        right
+          ? right
+          : () => showDots && <Icon name="dots-vertical" size={24} />
+      }
     />
   );
 }

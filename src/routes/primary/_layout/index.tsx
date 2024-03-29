@@ -3,20 +3,26 @@ import { IconButton } from 'react-native-paper';
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { ParamsList } from './type';
-import { MapScreen, ClubsScreen, DetailsScreen } from '../../routes';
-import { PrimaryStack } from '../primary/_layout';
+import HomeScreen from '../home';
+import ProfileScreen from '../profile';
+import RegisterScreen from '../register';
+import SignInScreen from '../sign-in';
+import SignOutScreen from '../sign-out';
 
 const Stack = createNativeStackNavigator();
 
-const ClubsStack = () => {
+export const PrimaryStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Clubs in Berlin" component={ClubsScreen} />
         <Stack.Screen
-          name="Details"
-          component={DetailsScreen}
+          name="Home"
+          component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Sign in"
+          component={SignInScreen}
           options={({ navigation }) => ({
             headerRight: () => (
               <IconButton
@@ -29,23 +35,39 @@ const ClubsStack = () => {
             ),
           })}
         />
-      </Stack.Group>
-    </Stack.Navigator>
-  );
-};
-
-const MapStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen
-          name="Map"
-          component={MapScreen}
-          options={{ headerShown: false }}
+          name="Register"
+          component={RegisterScreen}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <IconButton
+                icon="close"
+                size={24}
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              />
+            ),
+          })}
         />
         <Stack.Screen
-          name="Details"
-          component={DetailsScreen}
+          name="Sign out"
+          component={SignOutScreen}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <IconButton
+                icon="close"
+                size={24}
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              />
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
           options={({ navigation }) => ({
             headerRight: () => (
               <IconButton
@@ -70,7 +92,7 @@ export default function Root() {
     <Tab.Navigator>
       <Tab.Screen
         name="Home"
-        component={PrimaryStack}
+        component={PrimaryScreen}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, focused }) =>

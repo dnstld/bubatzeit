@@ -91,6 +91,11 @@ const openingHours = [
   },
 ];
 
+const owner = {
+  email: 'contato@denistoledo.com.br',
+  clubId: 1,
+};
+
 const clubs = [
   {
     id: 1,
@@ -98,6 +103,7 @@ const clubs = [
       latitude: 52.52,
       longitude: 13.405,
     },
+    owner: 'contato@denistoledo.com.br',
     address: {
       street: 'Marienstraße 67',
       city: 'Berlin',
