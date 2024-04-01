@@ -1,18 +1,20 @@
 import { useState } from 'react';
+import { View } from 'react-native';
 import { Button, Card, Text, IconButton, Switch } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { styles } from './styles';
 import CardTitle from '../../../components/card-title';
 import { useTheme } from '../../../theme';
+import WeedSvg from '../../../components/weed-svg';
 
 export default function HomeScreen({ navigation }) {
   const { colors } = useTheme();
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isMapOn, setIsMapOn] = useState(false);
+  const [showOnMap, setShowOnMap] = useState(false);
 
-  const onToggleMap = () => {
-    setIsMapOn(!isMapOn);
+  const onShowOnMap = () => {
+    setShowOnMap(!showOnMap);
     navigation.navigate('Location');
   };
 
@@ -34,52 +36,72 @@ export default function HomeScreen({ navigation }) {
     navigation.navigate('Profile');
   };
 
-  const onAddLocation = () => {
-    navigation.navigate('Location');
-  };
-
   return (
     <SafeAreaView style={styles.container}>
-      {loggedIn ? (
-        <Card>
-          <CardTitle
-            title="East Side Herbal Hub"
-            subtitle="eastside@herbalhub.com"
-            right={(props: any) => (
-              <IconButton
-                {...props}
-                icon="logout"
-                iconColor={colors.error}
-                onPress={onLogout}
-              />
-            )}
-          />
-          <Card.Actions>
-            {/* <Switch value={isMapOn} onValueChange={onToggleMap} /> */}
-            <Button icon="map-outline" onPress={onAddLocation}>
-              Show on map
-            </Button>
-            <Button icon="circle-edit-outline" onPress={onEditProfile}>
-              Profile
-            </Button>
-          </Card.Actions>
-        </Card>
-      ) : (
-        <Card>
-          <CardTitle title="Your club" subtitle="Register now" type="icon" />
-          <Card.Content>
-            <Text>Be part of the best Berlin weed club finder App.</Text>
-          </Card.Content>
-          <Card.Actions>
-            <Button icon="login" onPress={onSignIn}>
-              Sign in
-            </Button>
-            <Button icon="account-plus" onPress={onRegister}>
-              Register
-            </Button>
-          </Card.Actions>
-        </Card>
-      )}
+      <View style={styles.content}>
+        <View>
+          <Text variant="headlineLarge" style={styles.bubatzeit}>
+            BUBATZEIT
+          </Text>
+          <Text variant="headlineSmall">
+            Berlin modernstes Finder portal für Cannabis Social Clubs.
+          </Text>
+          <View style={styles.description}>
+            <WeedSvg type="map" color={colors.primary} size={16} />
+            <Text theme={{ colors: { onSurface: colors.primary } }}>
+              Entspannt einen cannabis club finden.
+            </Text>
+          </View>
+        </View>
+
+        {loggedIn ? (
+          <Card>
+            <CardTitle
+              title="East Side Herbal Hub"
+              subtitle="eastside@herbalhub.com"
+              right={(props: any) => (
+                <IconButton
+                  {...props}
+                  icon="logout"
+                  iconColor={colors.error}
+                  onPress={onLogout}
+                />
+              )}
+            />
+            <Card.Actions>
+              <View style={styles.switch}>
+                <Switch value={showOnMap} onValueChange={onShowOnMap} />
+                <Text variant="labelSmall">Auf Karte zeigen</Text>
+              </View>
+              {/* <Button icon="map-outline" onPress={onAddLocation}>
+                Auf Karte zeigen
+              </Button> */}
+              <Button icon="circle-edit-outline" onPress={onEditProfile}>
+                Profil
+              </Button>
+            </Card.Actions>
+          </Card>
+        ) : (
+          <Card>
+            <CardTitle
+              title="Dein Club"
+              subtitle="Registriere dich jetzt kostenlos auf unserer App."
+              type="icon"
+            />
+            {/* <Card.Content>
+              <Text>Registriere dich jetzt kostenlos auf unserer App.</Text>
+            </Card.Content> */}
+            <Card.Actions>
+              <Button icon="login" onPress={onSignIn}>
+                Anmelden
+              </Button>
+              <Button icon="account-plus" onPress={onRegister}>
+                Registrieren
+              </Button>
+            </Card.Actions>
+          </Card>
+        )}
+      </View>
     </SafeAreaView>
   );
 }

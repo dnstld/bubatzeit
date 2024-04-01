@@ -5,10 +5,10 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Button } from 'react-native-paper';
 
 import { styles } from './styles';
+import DismissKeyboard from '../../../components/dismiss-keyboard';
 import FormInput from '../../../components/form-input';
 import WeedSvg from '../../../components/weed-svg';
 import { useTheme } from '../../../theme';
-import DismissKeyboard from '../../../components/dismiss-keyboard';
 
 type FormValues = {
   email: string;
