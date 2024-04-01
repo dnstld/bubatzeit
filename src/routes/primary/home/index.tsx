@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Card, Text, IconButton } from 'react-native-paper';
+import { Button, Card, Text, IconButton, Switch } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { styles } from './styles';
@@ -9,6 +9,12 @@ import { useTheme } from '../../../theme';
 export default function HomeScreen({ navigation }) {
   const { colors } = useTheme();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isMapOn, setIsMapOn] = useState(false);
+
+  const onToggleMap = () => {
+    setIsMapOn(!isMapOn);
+    navigation.navigate('Location');
+  };
 
   const onLogout = () => {
     setLoggedIn(false);
@@ -28,6 +34,10 @@ export default function HomeScreen({ navigation }) {
     navigation.navigate('Profile');
   };
 
+  const onAddLocation = () => {
+    navigation.navigate('Location');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       {loggedIn ? (
@@ -45,8 +55,12 @@ export default function HomeScreen({ navigation }) {
             )}
           />
           <Card.Actions>
+            {/* <Switch value={isMapOn} onValueChange={onToggleMap} /> */}
+            <Button icon="map-outline" onPress={onAddLocation}>
+              Show on map
+            </Button>
             <Button icon="circle-edit-outline" onPress={onEditProfile}>
-              Edit profile
+              Profile
             </Button>
           </Card.Actions>
         </Card>

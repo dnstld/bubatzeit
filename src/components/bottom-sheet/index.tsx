@@ -14,7 +14,7 @@ type Props = {
   showDots?: boolean;
 };
 
-export default function CardTitle({ children }: Props) {
+export default function BottomSheet({ children }: Props) {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['75%'], []);
 

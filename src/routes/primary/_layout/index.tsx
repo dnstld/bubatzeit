@@ -4,6 +4,7 @@ import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navig
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import HomeScreen from '../home';
+import LocationScreen from '../location';
 import ProfileScreen from '../profile';
 import RegisterScreen from '../register';
 import SignInScreen from '../sign-in';
@@ -68,6 +69,21 @@ export const PrimaryStack = () => {
         <Stack.Screen
           name="Profile"
           component={ProfileScreen}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <IconButton
+                icon="close"
+                size={24}
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              />
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="Location"
+          component={LocationScreen}
           options={({ navigation }) => ({
             headerRight: () => (
               <IconButton

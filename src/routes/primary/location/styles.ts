@@ -11,4 +11,17 @@ export const styles = StyleSheet.create({
   submitButton: {
     marginTop: 16,
   },
+  address: {
+    flexDirection: 'row',
+    gap: 16,
+  },
+  street: {
+    flex: 1,
+  },
+  number: {
+    width: 100,
+  },
+  map: {
+    height: 250,
+  },
 });
