@@ -5,8 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { styles } from './styles';
 import CardTitle from '../../../components/card-title';
-import { useTheme } from '../../../theme';
 import WeedSvg from '../../../components/weed-svg';
+import { useTheme } from '../../../theme';
 
 export default function HomeScreen({ navigation }) {
   const { colors } = useTheme();
@@ -76,7 +76,11 @@ export default function HomeScreen({ navigation }) {
               {/* <Button icon="map-outline" onPress={onAddLocation}>
                 Auf Karte zeigen
               </Button> */}
-              <Button icon="circle-edit-outline" onPress={onEditProfile}>
+              <Button
+                icon="circle-edit-outline"
+                mode="outlined"
+                onPress={onEditProfile}
+              >
                 Profil
               </Button>
             </Card.Actions>

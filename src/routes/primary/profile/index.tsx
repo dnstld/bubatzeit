@@ -31,18 +31,18 @@ export default function ProfileScreen() {
             />
 
             <FormInput
-              label="Description"
+              label="Vereinsbeschreibung"
               name="description"
               numberOfLines={3}
             />
 
             <View style={styles.title}>
-              <Text>Contacts</Text>
+              <Text>Kontakte</Text>
               <Divider />
             </View>
 
             <FormInput
-              label="Email"
+              label="E-mail"
               name="email"
               value="mary@jane.com"
               keyboardType="email-address"
@@ -50,17 +50,17 @@ export default function ProfileScreen() {
             />
 
             <FormInput
-              label="Phone number"
+              label="Telefonnummer"
               name="phoneNumber"
               left={<TextInput.Icon icon="phone" />}
-              placeholder="e.g. +49 30 901820"
+              placeholder="z.B. +49 30 901820"
             />
 
             <FormInput
-              label="Website"
+              label="Webseite"
               name="website"
               left={<TextInput.Icon icon="web" />}
-              placeholder="e.g. maryjaneberlin.com"
+              placeholder="z.B. maryjaneberlin.com"
             />
 
             {/* <FormInput

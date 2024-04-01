@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SafeAreaView, View } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 
 import { styles } from './styles';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
@@ -12,25 +12,26 @@ type FormValues = {
   clubName: string;
 };
 
-export default function SignInScreen({ navigation }) {
+export default function PasswordForgottenScreen({ navigation }) {
   const form = useForm<FormValues>();
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   const onSubmit = form.handleSubmit(async (data) => {
     console.log('Submitted Data:', data);
+    navigation.navigate('Home');
   });
-
-  const onPasswordForgotten = () => {
-    navigation.navigate('Password Forgotten');
-  };
 
   return (
     <DismissKeyboard>
       <FormProvider {...form}>
         <SafeAreaView style={styles.container}>
           <View style={styles.content}>
+            <Text>
+              Trage deine E-Mail ein und wir schicken dir einen Link zum Ändern
+              deines Passwortes.
+            </Text>
+
             <FormInput
-              label="E-mail"
+              label="Email"
               name="email"
               keyboardType="email-address"
               rules={{
@@ -41,29 +42,15 @@ export default function SignInScreen({ navigation }) {
               }}
             />
 
-            <FormInput
-              label="Passwort"
-              name="password"
-              secureTextEntry={secureTextEntry}
-              right={
-                <TextInput.Icon
-                  icon="eye"
-                  onPress={() => setSecureTextEntry(!secureTextEntry)}
-                />
-              }
-            />
-
             <Button
               mode="contained"
-              icon="login"
+              icon="send"
               onPress={onSubmit}
               loading={form.formState.isSubmitting}
               style={styles.submitButton}
             >
-              Anmelden
+              Absenden
             </Button>
-
-            <Button onPress={onPasswordForgotten}>Password vergessen</Button>
           </View>
         </SafeAreaView>
       </FormProvider>

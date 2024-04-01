@@ -11,8 +11,9 @@ import WeedSvg from '../../../components/weed-svg';
 import { useTheme } from '../../../theme';
 
 type FormValues = {
-  email: string;
-  clubName: string;
+  street: string;
+  postalCode: string;
+  city: string;
 };
 
 const coordinates = {
@@ -29,49 +30,67 @@ export default function LocationScreen() {
     console.log('Submitted Data:', data);
   });
 
+  const onSearch = () => {
+    const street = form.getValues('street');
+    const postalCode = form.getValues('postalCode');
+    const city = form.getValues('city');
+    console.log(`${street}, ${postalCode} ${city}`);
+  };
+
   return (
-    <DismissKeyboard>
-      <FormProvider {...form}>
-        <SafeAreaView style={styles.container}>
-          <MapView
-            initialRegion={{
-              ...coordinates,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-            provider={PROVIDER_GOOGLE}
-            showsUserLocation
-            style={styles.map}
-          >
-            <Marker coordinate={coordinates}>
-              <WeedSvg color={colors.primary} />
-            </Marker>
-          </MapView>
+    <FormProvider {...form}>
+      <SafeAreaView style={styles.container}>
+        <MapView
+          initialRegion={{
+            ...coordinates,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+          provider={PROVIDER_GOOGLE}
+          showsUserLocation
+          style={styles.map}
+        >
+          <Marker coordinate={coordinates}>
+            <WeedSvg color={colors.primary} />
+          </Marker>
+        </MapView>
+        <DismissKeyboard>
           <View style={styles.content}>
-            <FormInput label="Street" name="street" />
-            <FormInput label="Number" name="number" />
+            <FormInput label="Straße, Hausnummer, Zusätze" name="street" />
 
             <View style={styles.address}>
               <FormInput
-                label="Postal code"
+                label="Postleitzahl"
                 name="postalCode"
+                keyboardType="numeric"
                 style={styles.street}
               />
-              <FormInput label="City" name="city" value="Berlin" disabled />
+              <FormInput label="Stadt" name="city" value="Berlin" disabled />
             </View>
 
             <Button
-              mode="contained"
-              icon="account-check"
-              onPress={onSubmit}
+              mode="outlined"
+              icon="map-search"
+              onPress={onSearch}
               loading={form.formState.isSubmitting}
               style={styles.submitButton}
             >
-              Save
+              Adresse suchen
+            </Button>
+
+            <Button
+              mode="contained"
+              icon="map-marker-plus"
+              onPress={onSubmit}
+              loading={form.formState.isSubmitting}
+              style={styles.submitButton}
+              disabled
+            >
+              Adresse speichern
             </Button>
           </View>
-        </SafeAreaView>
-      </FormProvider>
-    </DismissKeyboard>
+        </DismissKeyboard>
+      </SafeAreaView>
+    </FormProvider>
   );
 }

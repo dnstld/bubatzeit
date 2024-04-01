@@ -7,7 +7,7 @@ import { styles } from './styles';
 export default function SignOutScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Sign out</Text>
+      <Text>Abmelden</Text>
     </SafeAreaView>
   );
 }

@@ -5,8 +5,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import HomeScreen from '../home';
 import LocationScreen from '../location';
+import PasswordForgottenScreen from '../password-forgotten';
 import ProfileScreen from '../profile';
 import RegisterScreen from '../register';
+import ResetPasswordScreen from '../reset-password';
 import SignInScreen from '../sign-in';
 import SignOutScreen from '../sign-out';
 
@@ -34,6 +36,7 @@ export const PrimaryStack = () => {
                 }}
               />
             ),
+            title: 'Anmeldenrung',
           })}
         />
         <Stack.Screen
@@ -49,6 +52,7 @@ export const PrimaryStack = () => {
                 }}
               />
             ),
+            title: 'Registrierung',
           })}
         />
         <Stack.Screen
@@ -64,6 +68,7 @@ export const PrimaryStack = () => {
                 }}
               />
             ),
+            title: 'Abmelden',
           })}
         />
         <Stack.Screen
@@ -79,6 +84,7 @@ export const PrimaryStack = () => {
                 }}
               />
             ),
+            title: 'Dein profil',
           })}
         />
         <Stack.Screen
@@ -94,6 +100,38 @@ export const PrimaryStack = () => {
                 }}
               />
             ),
+            title: 'Clubadresse',
+          })}
+        />
+        <Stack.Screen
+          name="Reset password"
+          component={ResetPasswordScreen}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <IconButton
+                icon="close"
+                size={24}
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              />
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="Password Forgotten"
+          component={PasswordForgottenScreen}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <IconButton
+                icon="close"
+                size={24}
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              />
+            ),
+            title: 'Password zurücksetzen',
           })}
         />
       </Stack.Group>

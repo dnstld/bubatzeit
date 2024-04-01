@@ -12,7 +12,7 @@ type FormValues = {
   clubName: string;
 };
 
-export default function RegisterScreen() {
+export default function ResetPasswordScreen() {
   const form = useForm<FormValues>();
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
@@ -25,30 +25,6 @@ export default function RegisterScreen() {
       <FormProvider {...form}>
         <SafeAreaView style={styles.container}>
           <View style={styles.content}>
-            <FormInput
-              label="E-mail"
-              name="email"
-              keyboardType="email-address"
-              rules={{
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+$/gi,
-                  message: 'Insert a valid email',
-                },
-              }}
-            />
-
-            <FormInput
-              label="Club name"
-              name="clubName"
-              keyboardType="default"
-              rules={{
-                maxLength: {
-                  value: 50,
-                  message: 'Too much characters',
-                },
-              }}
-            />
-
             <FormInput
               label="Passwort"
               name="password"
@@ -75,13 +51,16 @@ export default function RegisterScreen() {
 
             <Button
               mode="contained"
-              icon="account-plus"
+              icon="login"
               onPress={onSubmit}
               loading={form.formState.isSubmitting}
               style={styles.submitButton}
             >
-              Registrieren
+              Anmelden
             </Button>
+
+            <Button onPress={onSubmit}>Password vergessen</Button>
+            <Button onPress={onSubmit}>Melde hier deinen Club an</Button>
           </View>
         </SafeAreaView>
       </FormProvider>
