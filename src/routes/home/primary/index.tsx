@@ -7,8 +7,9 @@ import { styles } from './styles';
 import CardTitle from '../../../components/card-title';
 import WeedSvg from '../../../components/weed-svg';
 import { useTheme } from '../../../theme';
+import { ScreenProps as HomeScreenProps } from '../__layout/type';
 
-export default function HomeScreen({ navigation }) {
+export const PrimaryScreen = ({ navigation }: HomeScreenProps<'Primary'>) => {
   const { colors } = useTheme();
   const [loggedIn, setLoggedIn] = useState(false);
   const [showOnMap, setShowOnMap] = useState(false);
@@ -20,12 +21,12 @@ export default function HomeScreen({ navigation }) {
 
   const onLogout = () => {
     setLoggedIn(false);
-    navigation.navigate('Sign out');
+    navigation.navigate('SignOut');
   };
 
   const onSignIn = () => {
     setLoggedIn(true);
-    navigation.navigate('Sign in');
+    navigation.navigate('SignIn');
   };
 
   const onRegister = () => {
@@ -108,4 +109,4 @@ export default function HomeScreen({ navigation }) {
       </View>
     </SafeAreaView>
   );
-}
+};

@@ -6,13 +6,14 @@ import { Button, Divider, Text, TextInput } from 'react-native-paper';
 import { styles } from './styles';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
 import FormInput from '../../../components/form-input';
+import { ScreenProps as HomeScreenProps } from '../__layout/type';
 
 type FormValues = {
   email: string;
   clubName: string;
 };
 
-export default function ProfileScreen() {
+export const ProfileScreen = ({}: HomeScreenProps<'Profile'>) => {
   const form = useForm<FormValues>();
 
   const onSubmit = form.handleSubmit(async (data) => {
@@ -108,4 +109,4 @@ export default function ProfileScreen() {
       </FormProvider>
     </DismissKeyboard>
   );
-}
+};

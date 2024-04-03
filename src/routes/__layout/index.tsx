@@ -1,76 +1,19 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { IconButton } from 'react-native-paper';
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { ParamsList } from './type';
-import { MapScreen, ClubsScreen, DetailsScreen } from '../../routes';
-import { PrimaryStack } from '../primary/_layout';
+import { ParamList } from './type';
+import { ClubsStack } from '../clubs/__layout';
+import { HomeStack } from '../home/__layout';
+import { MapStack } from '../map/__layout';
 
-const Stack = createNativeStackNavigator();
+export const Tab = createMaterialBottomTabNavigator<ParamList>();
 
-const ClubsStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Clubs in Berlin" component={ClubsScreen} />
-        <Stack.Screen
-          name="Details"
-          component={DetailsScreen}
-          options={({ navigation }) => ({
-            headerRight: () => (
-              <IconButton
-                icon="close"
-                size={24}
-                onPress={() => {
-                  navigation.goBack();
-                }}
-              />
-            ),
-          })}
-        />
-      </Stack.Group>
-    </Stack.Navigator>
-  );
-};
-
-const MapStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen
-          name="Map"
-          component={MapScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Details"
-          component={DetailsScreen}
-          options={({ navigation }) => ({
-            headerRight: () => (
-              <IconButton
-                icon="close"
-                size={24}
-                onPress={() => {
-                  navigation.goBack();
-                }}
-              />
-            ),
-          })}
-        />
-      </Stack.Group>
-    </Stack.Navigator>
-  );
-};
-
-export const Tab = createMaterialBottomTabNavigator<ParamsList>();
-
-export default function Root() {
+export const Root = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
         name="Home"
-        component={PrimaryStack}
+        component={HomeStack}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, focused }) =>
@@ -106,4 +49,4 @@ export default function Root() {
       />
     </Tab.Navigator>
   );
-}
+};

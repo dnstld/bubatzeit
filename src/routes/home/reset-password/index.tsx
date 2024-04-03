@@ -6,13 +6,13 @@ import { Button, TextInput } from 'react-native-paper';
 import { styles } from './styles';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
 import FormInput from '../../../components/form-input';
+import { ScreenProps as HomeScreenProps } from '../__layout/type';
 
 type FormValues = {
   email: string;
   clubName: string;
 };
-
-export default function RegisterScreen() {
+export const ResetPasswordScreen = ({}: HomeScreenProps<'ResetPassword'>) => {
   const form = useForm<FormValues>();
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
@@ -25,30 +25,6 @@ export default function RegisterScreen() {
       <FormProvider {...form}>
         <SafeAreaView style={styles.container}>
           <View style={styles.content}>
-            <FormInput
-              label="E-mail"
-              name="email"
-              keyboardType="email-address"
-              rules={{
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+$/gi,
-                  message: 'Insert a valid email',
-                },
-              }}
-            />
-
-            <FormInput
-              label="Club name"
-              name="clubName"
-              keyboardType="default"
-              rules={{
-                maxLength: {
-                  value: 50,
-                  message: 'Too much characters',
-                },
-              }}
-            />
-
             <FormInput
               label="Passwort"
               name="password"
@@ -75,16 +51,19 @@ export default function RegisterScreen() {
 
             <Button
               mode="contained"
-              icon="account-plus"
+              icon="login"
               onPress={onSubmit}
               loading={form.formState.isSubmitting}
               style={styles.submitButton}
             >
-              Registrieren
+              Anmelden
             </Button>
+
+            <Button onPress={onSubmit}>Password vergessen</Button>
+            <Button onPress={onSubmit}>Melde hier deinen Club an</Button>
           </View>
         </SafeAreaView>
       </FormProvider>
     </DismissKeyboard>
   );
-}
+};

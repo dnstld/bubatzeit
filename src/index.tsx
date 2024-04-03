@@ -5,7 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PaperProvider } from 'react-native-paper';
 
-import Root from './routes/__layout';
+import { Root } from './routes/__layout';
 import { styles } from './styles';
 import { theme } from './theme';
 

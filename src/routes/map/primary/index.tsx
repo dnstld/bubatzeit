@@ -6,9 +6,10 @@ import { Card } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
 
 import { styles } from './styles';
-import CardTitle from '../../components/card-title';
-import WeedSvg from '../../components/weed-svg';
-import { useTheme } from '../../theme';
+import CardTitle from '../../../components/card-title';
+import WeedSvg from '../../../components/weed-svg';
+import { useTheme } from '../../../theme';
+import { ScreenProps as MapScreenProps } from '../__layout/type';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -46,8 +47,7 @@ const GET_CLUBS = gql`
     }
   }
 `;
-
-export default function MapScreen({ navigation }) {
+export const PrimaryScreen = ({ navigation }: MapScreenProps<'Primary'>) => {
   const { loading, error, data } = useQuery(GET_CLUBS);
 
   const carrouselRef = useRef(null);
@@ -84,6 +84,7 @@ export default function MapScreen({ navigation }) {
         provider={PROVIDER_GOOGLE}
         style={styles.container}
         showsUserLocation
+        loadingEnabled
       >
         {data.clubs.map((club, index) => {
           return (
@@ -115,4 +116,4 @@ export default function MapScreen({ navigation }) {
       />
     </View>
   );
-}
+};

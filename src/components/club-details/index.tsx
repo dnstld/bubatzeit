@@ -67,6 +67,7 @@ export default function ClubDetails({ club }: Props) {
           provider={PROVIDER_GOOGLE}
           showsUserLocation
           style={styles.map}
+          loadingEnabled
         >
           <Marker coordinate={coordinates}>
             <WeedSvg color={colors.primary} />

@@ -3,7 +3,8 @@ import { FlatList, SafeAreaView } from 'react-native';
 import { Card, Divider } from 'react-native-paper';
 
 import { styles } from './styles';
-import CardTitle from '../../components/card-title';
+import CardTitle from '../../../components/card-title';
+import { ScreenProps as ClubsScreenProps } from '../__layout/type';
 
 const GET_CLUBS = gql`
   query clubs {
@@ -32,8 +33,7 @@ const GET_CLUBS = gql`
   }
 `;
 
-// @ts-ignore
-export default function ClubsScreen({ navigation }) {
+export const PrimaryScreen = ({ navigation }: ClubsScreenProps<'Primary'>) => {
   const { loading, error, data } = useQuery(GET_CLUBS);
 
   if (loading) return null;
@@ -71,4 +71,4 @@ export default function ClubsScreen({ navigation }) {
       />
     </SafeAreaView>
   );
-}
+};

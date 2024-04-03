@@ -1,30 +1,29 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { IconButton } from 'react-native-paper';
-import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import HomeScreen from '../home';
-import LocationScreen from '../location';
-import PasswordForgottenScreen from '../password-forgotten';
-import ProfileScreen from '../profile';
-import RegisterScreen from '../register';
-import ResetPasswordScreen from '../reset-password';
-import SignInScreen from '../sign-in';
-import SignOutScreen from '../sign-out';
+import { ParamList } from './type';
+import { LocationScreen } from '../location';
+import { PasswordForgottenScreen } from '../password-forgotten';
+import { PrimaryScreen } from '../primary';
+import { ProfileScreen } from '../profile';
+import { RegisterScreen } from '../register';
+import { ResetPasswordScreen } from '../reset-password';
+import { SignInScreen } from '../sign-in';
+import { SignOutScreen } from '../sign-out';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<ParamList>();
 
-export const PrimaryStack = () => {
+export const HomeStack = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Primary"
+        component={PrimaryScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Sign in"
+          name="SignIn"
           component={SignInScreen}
           options={({ navigation }) => ({
             headerRight: () => (
@@ -56,7 +55,7 @@ export const PrimaryStack = () => {
           })}
         />
         <Stack.Screen
-          name="Sign out"
+          name="SignOut"
           component={SignOutScreen}
           options={({ navigation }) => ({
             headerRight: () => (
@@ -104,7 +103,7 @@ export const PrimaryStack = () => {
           })}
         />
         <Stack.Screen
-          name="Reset password"
+          name="ResetPassword"
           component={ResetPasswordScreen}
           options={({ navigation }) => ({
             headerRight: () => (
@@ -119,7 +118,7 @@ export const PrimaryStack = () => {
           })}
         />
         <Stack.Screen
-          name="Password Forgotten"
+          name="PasswordForgotten"
           component={PasswordForgottenScreen}
           options={({ navigation }) => ({
             headerRight: () => (
@@ -138,48 +137,3 @@ export const PrimaryStack = () => {
     </Stack.Navigator>
   );
 };
-
-export const Tab = createMaterialBottomTabNavigator<ParamsList>();
-
-export default function Root() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Home"
-        component={PrimaryScreen}
-        options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({ color, focused }) =>
-            focused ? (
-              <Icon name="home" color={color} size={26} />
-            ) : (
-              <Icon name="home-outline" color={color} size={26} />
-            ),
-        }}
-      />
-      <Tab.Screen
-        name="Map"
-        component={MapStack}
-        options={{
-          tabBarLabel: 'Map',
-          tabBarIcon: ({ color, focused }) =>
-            focused ? (
-              <Icon name="map" color={color} size={26} />
-            ) : (
-              <Icon name="map-outline" color={color} size={26} />
-            ),
-        }}
-      />
-      <Tab.Screen
-        name="Clubs"
-        component={ClubsStack}
-        options={{
-          tabBarLabel: 'Clubs',
-          tabBarIcon: ({ color }) => (
-            <Icon name="format-list-bulleted" color={color} size={26} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  );
-}

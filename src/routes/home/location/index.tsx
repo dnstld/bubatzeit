@@ -1,7 +1,12 @@
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { SafeAreaView, View } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import { Dimensions, SafeAreaView, View } from 'react-native';
+import MapView, {
+  Marker,
+  PROVIDER_GOOGLE,
+  Polygon,
+  Polyline,
+} from 'react-native-maps';
 import { Button } from 'react-native-paper';
 
 import { styles } from './styles';
@@ -9,6 +14,7 @@ import DismissKeyboard from '../../../components/dismiss-keyboard';
 import FormInput from '../../../components/form-input';
 import WeedSvg from '../../../components/weed-svg';
 import { useTheme } from '../../../theme';
+import { ScreenProps as HomeScreenProps } from '../__layout/type';
 
 type FormValues = {
   street: string;
@@ -21,7 +27,7 @@ const coordinates = {
   longitude: 13.405,
 };
 
-export default function LocationScreen() {
+export const LocationScreen = ({}: HomeScreenProps<'Location'>) => {
   const form = useForm<FormValues>();
 
   const { colors } = useTheme();
@@ -37,6 +43,15 @@ export default function LocationScreen() {
     console.log(`${street}, ${postalCode} ${city}`);
   };
 
+  const { width, height } = Dimensions.get('window');
+
+  const ASPECT_RATIO = width / height;
+
+  const LATITUDE = 0.0922; // 13.404954
+  const LONGITUDE = 0.0421; // 52.520008
+  const LATITUDE_DELTA = 0.0922;
+  const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
   return (
     <FormProvider {...form}>
       <SafeAreaView style={styles.container}>
@@ -49,7 +64,43 @@ export default function LocationScreen() {
           provider={PROVIDER_GOOGLE}
           showsUserLocation
           style={styles.map}
+          loadingEnabled
         >
+          <Polygon
+            fillColor={'red'}
+            coordinates={[
+              {
+                latitude: LATITUDE + LATITUDE_DELTA / 5,
+                longitude: LONGITUDE + LONGITUDE_DELTA / 4,
+              },
+              {
+                latitude: LATITUDE + LATITUDE_DELTA / 3,
+                longitude: LONGITUDE + LONGITUDE_DELTA / 4,
+              },
+              {
+                latitude: LATITUDE + LATITUDE_DELTA / 4,
+                longitude: LONGITUDE + LONGITUDE_DELTA / 2,
+              },
+            ]}
+          />
+          <Polyline
+            strokeColor={'blue'}
+            tappable
+            coordinates={[
+              {
+                latitude: LATITUDE + LATITUDE_DELTA / 5,
+                longitude: LONGITUDE - LONGITUDE_DELTA / 4,
+              },
+              {
+                latitude: LATITUDE + LATITUDE_DELTA / 3,
+                longitude: LONGITUDE - LONGITUDE_DELTA / 4,
+              },
+              {
+                latitude: LATITUDE + LATITUDE_DELTA / 4,
+                longitude: LONGITUDE - LONGITUDE_DELTA / 2,
+              },
+            ]}
+          />
           <Marker coordinate={coordinates}>
             <WeedSvg color={colors.primary} />
           </Marker>
@@ -93,4 +144,4 @@ export default function LocationScreen() {
       </SafeAreaView>
     </FormProvider>
   );
-}
+};

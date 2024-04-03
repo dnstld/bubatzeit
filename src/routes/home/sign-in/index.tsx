@@ -6,13 +6,14 @@ import { Button, TextInput } from 'react-native-paper';
 import { styles } from './styles';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
 import FormInput from '../../../components/form-input';
+import { ScreenProps as HomeScreenProps } from '../__layout/type';
 
 type FormValues = {
   email: string;
   clubName: string;
 };
 
-export default function SignInScreen({ navigation }) {
+export const SignInScreen = ({ navigation }: HomeScreenProps<'SignIn'>) => {
   const form = useForm<FormValues>();
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
@@ -21,7 +22,7 @@ export default function SignInScreen({ navigation }) {
   });
 
   const onPasswordForgotten = () => {
-    navigation.navigate('Password Forgotten');
+    navigation.navigate('PasswordForgotten');
   };
 
   return (
@@ -69,4 +70,4 @@ export default function SignInScreen({ navigation }) {
       </FormProvider>
     </DismissKeyboard>
   );
-}
+};

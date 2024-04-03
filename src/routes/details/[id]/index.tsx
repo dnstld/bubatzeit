@@ -1,7 +1,8 @@
 import { gql, useQuery } from '@apollo/client';
+import { useRoute } from '@react-navigation/native';
 import React from 'react';
 
-import ClubDetails from '../../components/club-details';
+import ClubDetails from '../../../components/club-details';
 
 const GET_CLUB = gql`
   query GetClub($id: ID!) {
@@ -38,14 +39,9 @@ const GET_CLUB = gql`
   }
 `;
 
-export default function DetailsScreen({
-  route: {
-    params: { id },
-  },
-}: {
-  route: any;
-  navigation: any;
-}) {
+export const DetailsScreen = () => {
+  const { params } = useRoute();
+  const { id } = params as { id: string };
   const { loading, error, data } = useQuery(GET_CLUB, {
     variables: { id },
   });
@@ -54,4 +50,4 @@ export default function DetailsScreen({
   if (error) return null;
 
   return <ClubDetails club={data.club} />;
-}
+};
