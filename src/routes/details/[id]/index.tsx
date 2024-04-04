@@ -3,6 +3,7 @@ import { useRoute } from '@react-navigation/native';
 import React from 'react';
 
 import ClubDetails from '../../../components/club-details';
+import { ScreenProps as RootScreenProps } from '../../__layout/types';
 
 const GET_CLUB = gql`
   query GetClub($id: ID!) {
@@ -39,8 +40,8 @@ const GET_CLUB = gql`
   }
 `;
 
-export const DetailsScreen = () => {
-  const { params } = useRoute();
+export const Details = () => {
+  const { params } = useRoute<RootScreenProps<'Details'>['route']>();
   const { id } = params as { id: string };
   const { loading, error, data } = useQuery(GET_CLUB, {
     variables: { id },

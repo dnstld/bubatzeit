@@ -1,52 +1,32 @@
-import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
+import { IconButton } from 'react-native-paper';
 
-import { ParamList } from './type';
-import { ClubsStack } from '../clubs/__layout';
-import { HomeStack } from '../home/__layout';
-import { MapStack } from '../map/__layout';
+import { ParamList } from './types';
+import { Auth as AuthStack } from '../auth/__layout';
+import { Details as DetailsScreen } from '../details/[id]';
+import { Primary as PrimaryStack } from '../primary/__layout';
+import { Profile as ProfileStack } from '../profile/__layout';
 
-export const Tab = createMaterialBottomTabNavigator<ParamList>();
+export const Stack = createNativeStackNavigator<ParamList>();
 
 export const Root = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Home"
-        component={HomeStack}
-        options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({ color, focused }) =>
-            focused ? (
-              <Icon name="home" color={color} size={26} />
-            ) : (
-              <Icon name="home-outline" color={color} size={26} />
-            ),
-        }}
+    <Stack.Navigator id="Root">
+      <Stack.Screen
+        name="Primary"
+        component={PrimaryStack}
+        options={{ headerShown: false }}
       />
-      <Tab.Screen
-        name="Map"
-        component={MapStack}
-        options={{
-          tabBarLabel: 'Map',
-          tabBarIcon: ({ color, focused }) =>
-            focused ? (
-              <Icon name="map" color={color} size={26} />
-            ) : (
-              <Icon name="map-outline" color={color} size={26} />
-            ),
-        }}
-      />
-      <Tab.Screen
-        name="Clubs"
-        component={ClubsStack}
-        options={{
-          tabBarLabel: 'Clubs',
-          tabBarIcon: ({ color }) => (
-            <Icon name="format-list-bulleted" color={color} size={26} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
+      <Stack.Group
+        screenOptions={({ navigation }) => ({
+          presentation: 'modal',
+        })}
+      >
+        <Stack.Screen name="Auth" component={AuthStack} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Profile" component={ProfileStack} />
+      </Stack.Group>
+    </Stack.Navigator>
   );
 };
