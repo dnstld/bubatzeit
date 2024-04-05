@@ -94,9 +94,10 @@ export const Map = ({ navigation }: PrimaryScreenProps<'Map'>) => {
               onPress={() => onSelectClub(club.id)}
             >
               {selectedCarouselItem === index && styles.selected ? (
-                <WeedSvg type="map" color={colors.onSurface} />
+                <WeedSvg map size={64} />
               ) : (
-                <WeedSvg type="map" size={32} color={colors.primary} />
+                <WeedSvg map size={32} />
+                // <WeedSvg size={32} color={colors.primary} />
               )}
             </Marker>
           );

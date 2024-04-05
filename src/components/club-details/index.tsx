@@ -70,7 +70,7 @@ export default function ClubDetails({ club }: Props) {
           loadingEnabled
         >
           <Marker coordinate={coordinates}>
-            <WeedSvg color={colors.primary} />
+            <WeedSvg map color={colors.primary} />
           </Marker>
         </MapView>
 
