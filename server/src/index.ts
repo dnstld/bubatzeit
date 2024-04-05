@@ -55,39 +55,39 @@ const images = [
 
 const openingHours = [
   {
-    day: 'Monday',
-    open: '9:00am',
-    close: '17:30pm',
+    day: 'Montag',
+    open: '9:00',
+    close: '17:30',
   },
   {
-    day: 'Tuesday',
-    open: '9:00am',
-    close: '17:30pm',
+    day: 'Dienstag',
+    open: '9:00',
+    close: '17:30',
   },
   {
-    day: 'Wednesday',
-    open: '9:00am',
-    close: '17:30pm',
+    day: 'Mittwoch',
+    open: '9:00',
+    close: '17:30',
   },
   {
-    day: 'Thursday',
-    open: '9:00am',
-    close: '17:30pm',
+    day: 'Donnerstag',
+    open: '9:00',
+    close: '17:30',
   },
   {
-    day: 'Friday',
-    open: '9:00am',
-    close: '17:30pm',
+    day: 'Freitag',
+    open: '9:00',
+    close: '17:30',
   },
   {
-    day: 'Saturday',
-    open: '9:00am',
-    close: '12:30pm',
+    day: 'Samstag',
+    open: '9:00',
+    close: '12:30',
   },
   {
-    day: 'Sunday',
-    open: 'Closed',
-    close: 'Closed',
+    day: 'Sonntag',
+    open: null,
+    close: null,
   },
 ];
 

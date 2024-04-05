@@ -1,6 +1,6 @@
 import { useQuery, gql } from '@apollo/client';
 import { FlatList, SafeAreaView } from 'react-native';
-import { Card, Divider, Text } from 'react-native-paper';
+import { Card, Divider } from 'react-native-paper';
 
 import { styles } from './styles';
 import CardTitle from '../../../components/card-title';
@@ -66,9 +66,6 @@ export const Clubs = ({ navigation }: PrimaryScreenProps<'Clubs'>) => {
           </Card>
         )}
         ItemSeparatorComponent={Divider}
-        ListHeaderComponent={
-          <Text variant="headlineSmall">Clubs in Berlin</Text>
-        }
         ListHeaderComponentStyle={styles.listHeader}
         keyExtractor={(item) => item.title}
       />

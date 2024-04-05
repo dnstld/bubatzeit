@@ -1,7 +1,8 @@
 import { openURL } from 'expo-linking';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Card, Divider, List, Text } from 'react-native-paper';
+import { Button, Card, Divider, List, Surface, Text } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { styles } from './styles';
 import { useTheme } from '../../theme';
@@ -58,39 +59,39 @@ export default function ClubDetails({ club }: Props) {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.content}>
-        <MapView
-          initialRegion={{
-            ...coordinates,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-          provider={PROVIDER_GOOGLE}
-          showsUserLocation
-          style={styles.map}
-          loadingEnabled
-        >
-          <Marker coordinate={coordinates}>
-            <WeedSvg map color={colors.primary} />
-          </Marker>
-        </MapView>
+        {address && (
+          <MapView
+            initialRegion={{
+              ...coordinates,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+            provider={PROVIDER_GOOGLE}
+            showsUserLocation
+            style={styles.map}
+            loadingEnabled
+          >
+            <Marker coordinate={coordinates}>
+              <WeedSvg map color={colors.primary} />
+            </Marker>
+          </MapView>
+        )}
 
         <Card mode="contained" theme={{ colors: { surfaceVariant: 'white' } }}>
           <CardTitle
             title={title}
-            subtitle={`${address.street}, ${address.postalCode}`}
+            subtitle={
+              address
+                ? `${address.street}, ${address.postalCode}`
+                : 'Digital Club'
+            }
             imageUri={image.uri}
           />
           <Card.Content>
-            <Text variant="titleMedium" style={styles.title}>
-              Description:
-            </Text>
-            <Text>{description}</Text>
+            <Surface style={styles.description} elevation={4}>
+              <Text>{description}</Text>
+            </Surface>
 
-            <Divider style={styles.divider} />
-
-            <Text variant="titleMedium" style={styles.title}>
-              Contact:
-            </Text>
             <List.Item
               title={profile.phone}
               onPress={() => openURL(profile.phone)}
@@ -115,28 +116,57 @@ export default function ClubDetails({ club }: Props) {
 
             <Divider style={styles.divider} />
 
-            <Text variant="titleMedium" style={styles.title}>
-              Join our group:
+            <Text variant="titleSmall" style={styles.title}>
+              Folge uns:
             </Text>
-            <List.Item
-              title="Telegram"
-              onPress={() => openURL(groups.telegram)}
-              left={(props) => (
-                <List.Icon {...props} style={styles.listIcon} icon="chat" />
-              )}
-            />
-            <List.Item
-              title="WhatsApp"
-              onPress={() => openURL(groups.whatsapp)}
-              left={(props) => (
-                <List.Icon {...props} style={styles.listIcon} icon="chat" />
-              )}
-            />
+            <View style={styles.socialContainer}>
+              <Button
+                icon={() => <Icon name="instagram" size={24} color="#ffffff" />}
+                mode="contained"
+                buttonColor="#515BD4"
+                onPress={() => openURL(groups.telegram)}
+              >
+                Instagram
+              </Button>
+
+              <Button
+                icon={() => <Icon name="facebook" size={24} color="#ffffff" />}
+                mode="contained"
+                buttonColor="#0866ff"
+                onPress={() => openURL('https://www.facebook.com/')}
+              >
+                Facefook
+              </Button>
+            </View>
 
             <Divider style={styles.divider} />
 
-            <Text variant="titleMedium" style={styles.title}>
-              Opening hours:
+            <Text variant="titleSmall" style={styles.title}>
+              Trete unserer Gruppe bei:
+            </Text>
+            <View style={styles.socialContainer}>
+              <Button
+                icon={() => <Icon name="telegram" size={24} color="#ffffff" />}
+                mode="contained"
+                buttonColor="#3b5998"
+                onPress={() => openURL(groups.telegram)}
+              >
+                Telegram
+              </Button>
+              <Button
+                icon={() => <Icon name="whatsapp" size={24} color="#ffffff" />}
+                mode="contained"
+                buttonColor="#25d366"
+                onPress={() => openURL(groups.whatsapp)}
+              >
+                Whatsapp
+              </Button>
+            </View>
+
+            <Divider style={styles.divider} />
+
+            <Text variant="titleSmall" style={styles.title}>
+              Öffnungszeiten:
             </Text>
             <View>
               {openingHours.map((hour, index) => (
@@ -147,10 +177,23 @@ export default function ClubDetails({ club }: Props) {
                   >
                     {hour.day}
                   </Text>
-                  <Text variant="bodySmall" style={styles.openingHoursText}>
-                    {hour.open}
-                  </Text>
-                  <Text style={styles.openingHoursText}>{hour.close}</Text>
+                  {hour.open && hour.close ? (
+                    <>
+                      <Text variant="bodySmall" style={styles.openingHoursText}>
+                        {hour.open}
+                      </Text>
+                      <Text style={styles.openingHoursText}>{hour.close}</Text>
+                    </>
+                  ) : (
+                    <>
+                      <Text variant="bodySmall" style={styles.openingHoursText}>
+                        ---
+                      </Text>
+                      <Text variant="bodySmall" style={styles.openingHoursText}>
+                        ---
+                      </Text>
+                    </>
+                  )}
                 </View>
               ))}
             </View>

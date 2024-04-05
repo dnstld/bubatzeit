@@ -8,7 +8,6 @@ import Carousel from 'react-native-snap-carousel';
 import { styles } from './styles';
 import CardTitle from '../../../components/card-title';
 import WeedSvg from '../../../components/weed-svg';
-import { useTheme } from '../../../theme';
 import { ScreenProps as PrimaryScreenProps } from '../__layout/types';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
@@ -53,7 +52,6 @@ export const Map = ({ navigation }: PrimaryScreenProps<'Map'>) => {
   const carrouselRef = useRef(null);
 
   const [selectedCarouselItem, setSelectedCarouselItem] = useState(0);
-  const { colors } = useTheme();
 
   const onSelectClub = (clubId: string) => {
     navigation.navigate('Details', {
@@ -97,7 +95,6 @@ export const Map = ({ navigation }: PrimaryScreenProps<'Map'>) => {
                 <WeedSvg map size={64} />
               ) : (
                 <WeedSvg map size={32} />
-                // <WeedSvg size={32} color={colors.primary} />
               )}
             </Marker>
           );

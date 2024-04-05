@@ -39,7 +39,11 @@ export const Root = () => {
         })}
       >
         <Stack.Screen name="Auth" component={AuthStack} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen
+          name="Details"
+          component={DetailsScreen}
+          options={{ title: 'Club details' }}
+        />
         <Stack.Screen name="Profile" component={ProfileStack} />
       </Stack.Group>
     </Stack.Navigator>

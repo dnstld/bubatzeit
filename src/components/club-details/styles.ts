@@ -31,4 +31,12 @@ export const styles = StyleSheet.create({
   listIcon: {
     padding: 0,
   },
+  description: {
+    padding: 16,
+    marginVertical: 8,
+  },
+  socialContainer: {
+    flexDirection: 'row',
+    gap: 16,
+  },
 });
