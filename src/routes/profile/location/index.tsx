@@ -11,7 +11,7 @@ import { Button } from 'react-native-paper';
 
 import { styles } from './styles';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
-import FormInput from '../../../components/form-input';
+import { TextInput } from '../../../components/text-input';
 import WeedSvg from '../../../components/weed-svg';
 import { useTheme } from '../../../theme';
 import { ScreenProps as ProfileScreenProps } from '../__layout/types';
@@ -108,16 +108,15 @@ export const Location = ({ navigation }: ProfileScreenProps<'Location'>) => {
         </MapView>
         <DismissKeyboard>
           <View style={styles.content}>
-            <FormInput label="Straße, Hausnummer, Zusätze" name="street" />
+            <TextInput label="Straße, Hausnummer, Zusätze" />
 
             <View style={styles.address}>
-              <FormInput
+              <TextInput
                 label="Postleitzahl"
-                name="postalCode"
                 keyboardType="numeric"
                 style={styles.street}
               />
-              <FormInput label="Stadt" name="city" value="Berlin" disabled />
+              <TextInput label="Stadt" value="Berlin" disabled />
             </View>
 
             <Button

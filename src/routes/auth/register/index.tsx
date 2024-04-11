@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SafeAreaView, View } from 'react-native';
-import { Button, TextInput, Text } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 
 import { styles } from './styles';
+import { ClubNameInput } from '../../../components/club-name-input';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
-import FormInput from '../../../components/form-input';
+import { EmailInput } from '../../../components/email-input';
+import { NewPasswordInput } from '../../../components/new-password-input';
 import { ScreenProps as AuthScreenProps } from '../__layout/types';
 
 type FormValues = {
@@ -15,7 +17,6 @@ type FormValues = {
 
 export const Register = ({ navigation }: AuthScreenProps<'Register'>) => {
   const form = useForm<FormValues>();
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   const onSubmit = form.handleSubmit(async (data) => {
     console.log('Submitted Data:', data);
@@ -28,53 +29,10 @@ export const Register = ({ navigation }: AuthScreenProps<'Register'>) => {
         <SafeAreaView style={styles.container}>
           <View style={styles.content}>
             <Text>Registrierung</Text>
-            <FormInput
-              label="E-mail"
-              name="email"
-              keyboardType="email-address"
-              rules={{
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+$/gi,
-                  message: 'Insert a valid email',
-                },
-              }}
-            />
 
-            <FormInput
-              label="Club name"
-              name="clubName"
-              keyboardType="default"
-              rules={{
-                maxLength: {
-                  value: 50,
-                  message: 'Too much characters',
-                },
-              }}
-            />
-
-            <FormInput
-              label="Passwort"
-              name="password"
-              secureTextEntry={secureTextEntry}
-              right={
-                <TextInput.Icon
-                  icon="eye"
-                  onPress={() => setSecureTextEntry(!secureTextEntry)}
-                />
-              }
-            />
-
-            <FormInput
-              label="Passwort wiederholen"
-              name="password"
-              secureTextEntry={secureTextEntry}
-              right={
-                <TextInput.Icon
-                  icon="eye"
-                  onPress={() => setSecureTextEntry(!secureTextEntry)}
-                />
-              }
-            />
+            <EmailInput />
+            <ClubNameInput />
+            <NewPasswordInput email="contato@denistoledo.com.br" />
 
             <Button
               mode="contained"

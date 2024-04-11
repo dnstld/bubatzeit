@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SafeAreaView, View } from 'react-native';
-import { Button, TextInput, Text } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 
 import { styles } from './styles';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
-import FormInput from '../../../components/form-input';
+import { PasswordInput } from '../../../components/password-input';
 import { ScreenProps as AuthScreenProps } from '../__layout/types';
 
 type FormValues = {
@@ -16,7 +16,6 @@ export const ResetPassword = ({
   navigation,
 }: AuthScreenProps<'ResetPassword'>) => {
   const form = useForm<FormValues>();
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   const onSubmit = form.handleSubmit(async (data) => {
     console.log('Submitted Data:', data);
@@ -29,29 +28,9 @@ export const ResetPassword = ({
         <SafeAreaView style={styles.container}>
           <View style={styles.content}>
             <Text>Passwort zurücksetzen</Text>
-            <FormInput
-              label="Passwort"
-              name="password"
-              secureTextEntry={secureTextEntry}
-              right={
-                <TextInput.Icon
-                  icon="eye"
-                  onPress={() => setSecureTextEntry(!secureTextEntry)}
-                />
-              }
-            />
 
-            <FormInput
-              label="Passwort wiederholen"
-              name="password"
-              secureTextEntry={secureTextEntry}
-              right={
-                <TextInput.Icon
-                  icon="eye"
-                  onPress={() => setSecureTextEntry(!secureTextEntry)}
-                />
-              }
-            />
+            <PasswordInput />
+            <PasswordInput />
 
             <Button
               mode="contained"

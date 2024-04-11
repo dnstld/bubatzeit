@@ -1,11 +1,18 @@
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SafeAreaView, View } from 'react-native';
-import { Button, Divider, Text, TextInput } from 'react-native-paper';
+import {
+  Button,
+  Divider,
+  Text,
+  TextInput as RNTextInput,
+} from 'react-native-paper';
 
 import { styles } from './styles';
+import { ClubNameInput } from '../../../components/club-name-input';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
-import FormInput from '../../../components/form-input';
+import { EmailInput } from '../../../components/email-input';
+import { TextInput } from '../../../components/text-input';
 import { ScreenProps as ProfileScreenProps } from '../__layout/types';
 
 type FormValues = {
@@ -26,15 +33,12 @@ export const Club = ({ navigation }: ProfileScreenProps<'Club'>) => {
       <FormProvider {...form}>
         <SafeAreaView style={styles.container}>
           <View style={styles.content}>
-            <FormInput
-              label="Club name"
-              name="clubName"
-              value="Mary Jane Berlin"
-            />
+            <ClubNameInput value="Mary Jane Berlin" />
 
-            <FormInput
+            <TextInput
               label="Vereinsbeschreibung"
-              name="description"
+              maxLength={300}
+              multiline
               numberOfLines={3}
             />
 
@@ -43,35 +47,30 @@ export const Club = ({ navigation }: ProfileScreenProps<'Club'>) => {
               <Divider />
             </View>
 
-            <FormInput
-              label="E-mail"
-              name="email"
+            <EmailInput
               value="mary@jane.com"
-              keyboardType="email-address"
-              right={<TextInput.Icon icon="check" />}
+              left={<RNTextInput.Icon icon="email" />}
             />
 
-            <FormInput
+            <TextInput
               label="Telefonnummer"
-              name="phoneNumber"
-              left={<TextInput.Icon icon="phone" />}
+              left={<RNTextInput.Icon icon="phone" />}
               placeholder="z.B. +49 30 901820"
             />
 
-            <FormInput
+            <TextInput
               label="Webseite"
-              name="website"
-              left={<TextInput.Icon icon="web" />}
+              left={<RNTextInput.Icon icon="web" />}
               placeholder="z.B. maryjaneberlin.com"
             />
 
-            {/* <FormInput
+            {/* <TextInput
                 label="Telegram"
                 name="telefram"
                 left={<TextInput.Icon icon="chat-outline" />}
               />
 
-              <FormInput
+              <TextInput
                 label="WhatsApp"
                 name="whatsapp"
                 left={<TextInput.Icon icon="chat-outline" />}
@@ -82,14 +81,14 @@ export const Club = ({ navigation }: ProfileScreenProps<'Club'>) => {
                 <Divider />
               </View>
 
-              <FormInput
+              <TextInput
                 label="Telegram link"
                 name="telefram"
                 left={<TextInput.Icon icon="chat-outline" />}
                 placeholder="e.g. t.me/maryjaneberlin"
               />
 
-              <FormInput
+              <TextInput
                 label="WhatsApp link"
                 name="whatsapp"
                 left={<TextInput.Icon icon="chat-outline" />}

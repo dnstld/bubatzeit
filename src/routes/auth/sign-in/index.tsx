@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SafeAreaView, View } from 'react-native';
-import { Button, TextInput, Text } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 
 import { styles } from './styles';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
-import FormInput from '../../../components/form-input';
+import { EmailInput } from '../../../components/email-input';
+import { PasswordInput } from '../../../components/password-input';
 import { ScreenProps as AuthScreenProps } from '../__layout/types';
 
 type FormValues = {
@@ -15,7 +16,6 @@ type FormValues = {
 
 export const SignIn = ({ navigation }: AuthScreenProps<'SignIn'>) => {
   const form = useForm<FormValues>();
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   const onSubmit = form.handleSubmit(async (data) => {
     console.log('Submitted Data:', data);
@@ -32,29 +32,8 @@ export const SignIn = ({ navigation }: AuthScreenProps<'SignIn'>) => {
         <SafeAreaView style={styles.container}>
           <View style={styles.content}>
             <Text>Anmeldenrung</Text>
-            <FormInput
-              label="E-mail"
-              name="email"
-              keyboardType="email-address"
-              rules={{
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+$/gi,
-                  message: 'Insert a valid email',
-                },
-              }}
-            />
-
-            <FormInput
-              label="Passwort"
-              name="password"
-              secureTextEntry={secureTextEntry}
-              right={
-                <TextInput.Icon
-                  icon="eye"
-                  onPress={() => setSecureTextEntry(!secureTextEntry)}
-                />
-              }
-            />
+            <EmailInput />
+            <PasswordInput />
 
             <Button
               mode="contained"

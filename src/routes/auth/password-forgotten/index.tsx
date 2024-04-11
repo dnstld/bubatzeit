@@ -5,7 +5,7 @@ import { Button, Text } from 'react-native-paper';
 
 import { styles } from './styles';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
-import FormInput from '../../../components/form-input';
+import { EmailInput } from '../../../components/email-input';
 import { ScreenProps as AuthScreenProps } from '../__layout/types';
 
 type FormValues = {
@@ -35,17 +35,7 @@ export const PasswordForgotten = ({
 
             <Text>Password zurücksetzen</Text>
 
-            <FormInput
-              label="Email"
-              name="email"
-              keyboardType="email-address"
-              rules={{
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+$/gi,
-                  message: 'Insert a valid email',
-                },
-              }}
-            />
+            <EmailInput />
 
             <Button
               mode="contained"
