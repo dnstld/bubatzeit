@@ -1,6 +1,6 @@
 import { useQuery, gql } from '@apollo/client';
-import { FlatList, SafeAreaView } from 'react-native';
-import { Card, Divider } from 'react-native-paper';
+import { SafeAreaView, SectionList } from 'react-native';
+import { Card, Divider, HelperText } from 'react-native-paper';
 
 import { styles } from './styles';
 import CardTitle from '../../../components/card-title';
@@ -39,35 +39,66 @@ export const Clubs = ({ navigation }: PrimaryScreenProps<'Clubs'>) => {
   if (loading) return null;
   if (error) return null;
 
-  const sortedData = [...data.clubs].sort((a, b) =>
+  const sortedClubs = [...data.clubs].sort((a, b) =>
     a.title.localeCompare(b.title),
   );
 
+  const getSectionHeader = (club) => {
+    return club.title.charAt(0).toUpperCase();
+  };
+
+  const renderSectionHeader = ({ section }) => {
+    return (
+      <HelperText type="info" disabled>
+        {section.title}
+      </HelperText>
+    );
+  };
+
+  const renderItem = ({ item }) => {
+    return (
+      <Card
+        key={item.id}
+        mode="contained"
+        theme={{ roundness: 0 }}
+        onPress={() => {
+          navigation.navigate('Details', {
+            id: item.id,
+          });
+        }}
+      >
+        <CardTitle
+          title={item.title}
+          subtitle={`${item.address.street}, ${item.address.postalCode}`}
+          showDots
+        />
+      </Card>
+    );
+  };
+
+  const sections = sortedClubs.reduce((acc, club) => {
+    const sectionHeader = getSectionHeader(club);
+    if (!acc[sectionHeader]) {
+      acc[sectionHeader] = [];
+    }
+    acc[sectionHeader].push(club);
+    return acc;
+  }, {});
+
+  const sectionArray = Object.keys(sections).map((key) => ({
+    title: key,
+    data: sections[key],
+  }));
+
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={sortedData}
-        renderItem={({ item }) => (
-          <Card
-            key={item.id}
-            mode="contained"
-            theme={{ roundness: 0 }}
-            onPress={() => {
-              navigation.navigate('Details', {
-                id: item.id,
-              });
-            }}
-          >
-            <CardTitle
-              title={item.title}
-              subtitle={`${item.address.street}, ${item.address.postalCode}`}
-              showDots
-            />
-          </Card>
-        )}
+      <SectionList
+        sections={sectionArray}
+        renderItem={renderItem}
+        renderSectionHeader={renderSectionHeader}
+        keyExtractor={(item) => item.id.toString()}
         ItemSeparatorComponent={Divider}
-        ListHeaderComponentStyle={styles.listHeader}
-        keyExtractor={(item) => item.title}
+        stickySectionHeadersEnabled={false}
       />
     </SafeAreaView>
   );

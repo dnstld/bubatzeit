@@ -48,7 +48,7 @@ export const Home = ({ navigation }: PrimaryScreenProps<'Home'>) => {
             Berlin modernstes Finder portal für Cannabis Social Clubs.
           </Text>
           <View style={styles.description}>
-            <WeedSvg map color={colors.primary} />
+            <WeedSvg map color={colors.primary} size={32} />
             <Text theme={{ colors: { onSurface: colors.primary } }}>
               Entspannt einen cannabis club finden.
             </Text>
