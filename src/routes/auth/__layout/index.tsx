@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { IconButton } from 'react-native-paper';
 
 import { ParamList } from './types';
 import { PasswordForgot as PasswordForgotScreen } from '../password-forgot';
@@ -12,7 +11,12 @@ const Stack = createNativeStackNavigator<ParamList>();
 
 export const Auth = () => {
   return (
-    <Stack.Navigator id="Auth" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      id="Auth"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen name="SignIn" component={SignInScreen} />
       <Stack.Screen name="SignOut" component={SignOutScreen} />
       <Stack.Screen name="PasswordForgot" component={PasswordForgotScreen} />
