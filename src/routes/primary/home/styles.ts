@@ -23,4 +23,9 @@ export const styles = StyleSheet.create({
     gap: 4,
     marginTop: 16,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
 });

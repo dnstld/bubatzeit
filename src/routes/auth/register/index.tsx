@@ -1,9 +1,10 @@
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SafeAreaView, View } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 
 import { styles } from './styles';
+import AuthHeader from '../../../components/auth-header';
 import { ClubNameInput } from '../../../components/club-name-input';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
 import { EmailInput } from '../../../components/email-input';
@@ -28,7 +29,7 @@ export const Register = ({ navigation }: AuthScreenProps<'Register'>) => {
       <FormProvider {...form}>
         <SafeAreaView style={styles.container}>
           <View style={styles.content}>
-            <Text>Registrierung</Text>
+            <AuthHeader title="Registrierung" />
 
             <EmailInput />
             <ClubNameInput />

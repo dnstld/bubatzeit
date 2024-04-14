@@ -7,15 +7,16 @@ import { styles } from './styles';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
 import { EmailInput } from '../../../components/email-input';
 import { ScreenProps as AuthScreenProps } from '../__layout/types';
+import AuthHeader from '../../../components/auth-header';
 
 type FormValues = {
   email: string;
   clubName: string;
 };
 
-export const PasswordForgotten = ({
+export const PasswordForgot = ({
   navigation,
-}: AuthScreenProps<'PasswordForgotten'>) => {
+}: AuthScreenProps<'PasswordForgot'>) => {
   const form = useForm<FormValues>();
 
   const onSubmit = form.handleSubmit(async (data) => {
@@ -28,12 +29,11 @@ export const PasswordForgotten = ({
       <FormProvider {...form}>
         <SafeAreaView style={styles.container}>
           <View style={styles.content}>
-            <Text>
-              Trage deine E-Mail ein und wir schicken dir einen Link zum Ändern
-              deines Passwortes.
-            </Text>
-
-            <Text>Password zurücksetzen</Text>
+            <AuthHeader
+              title="Password zurücksetzen"
+              subtitle="Trage deine E-Mail ein und wir schicken dir einen Link zum Ändern
+              deines Passwortes."
+            />
 
             <EmailInput />
 

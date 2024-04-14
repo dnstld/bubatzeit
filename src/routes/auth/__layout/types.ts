@@ -9,7 +9,7 @@ import {
 export type ParamList = {
   SignIn: undefined;
   SignOut: undefined;
-  PasswordForgotten: undefined;
+  PasswordForgot: undefined;
   Register: undefined;
   ResetPassword: undefined;
 };

@@ -1,9 +1,10 @@
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SafeAreaView, View } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 
 import { styles } from './styles';
+import AuthHeader from '../../../components/auth-header';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
 import { PasswordInput } from '../../../components/password-input';
 import { ScreenProps as AuthScreenProps } from '../__layout/types';
@@ -27,7 +28,7 @@ export const ResetPassword = ({
       <FormProvider {...form}>
         <SafeAreaView style={styles.container}>
           <View style={styles.content}>
-            <Text>Passwort zurücksetzen</Text>
+            <AuthHeader title="Passwort zurücksetzen" />
 
             <PasswordInput />
             <PasswordInput />

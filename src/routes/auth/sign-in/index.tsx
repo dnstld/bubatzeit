@@ -1,9 +1,10 @@
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SafeAreaView, View } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 
 import { styles } from './styles';
+import AuthHeader from '../../../components/auth-header';
 import DismissKeyboard from '../../../components/dismiss-keyboard';
 import { EmailInput } from '../../../components/email-input';
 import { PasswordInput } from '../../../components/password-input';
@@ -22,8 +23,8 @@ export const SignIn = ({ navigation }: AuthScreenProps<'SignIn'>) => {
     navigation.navigate('Primary', { screen: 'Home' });
   });
 
-  const onPasswordForgotten = () => {
-    navigation.navigate('PasswordForgotten');
+  const onPasswordForgot = () => {
+    navigation.navigate('PasswordForgot');
   };
 
   return (
@@ -31,7 +32,8 @@ export const SignIn = ({ navigation }: AuthScreenProps<'SignIn'>) => {
       <FormProvider {...form}>
         <SafeAreaView style={styles.container}>
           <View style={styles.content}>
-            <Text>Anmeldenrung</Text>
+            <AuthHeader title="Anmeldenrung" />
+
             <EmailInput />
             <PasswordInput />
 
@@ -45,7 +47,7 @@ export const SignIn = ({ navigation }: AuthScreenProps<'SignIn'>) => {
               Anmelden
             </Button>
 
-            <Button onPress={onPasswordForgotten}>Password vergessen</Button>
+            <Button onPress={onPasswordForgot}>Password vergessen</Button>
           </View>
         </SafeAreaView>
       </FormProvider>
