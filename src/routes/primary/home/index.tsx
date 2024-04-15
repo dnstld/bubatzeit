@@ -1,13 +1,23 @@
 import { useState } from 'react';
 import { View } from 'react-native';
-import { Button, Card, Text, IconButton, Switch } from 'react-native-paper';
+import {
+  Button,
+  Card,
+  Text,
+  IconButton,
+  Switch,
+  Banner,
+} from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { styles } from './styles';
 import CardTitle from '../../../components/card-title';
 import WeedSvg from '../../../components/weed-svg';
 import { useTheme } from '../../../theme';
 import { ScreenProps as PrimaryScreenProps } from '../__layout/types';
+
+const isEmailVerified = false;
 
 export const Home = ({ navigation }: PrimaryScreenProps<'Home'>) => {
   const { colors } = useTheme();
@@ -40,6 +50,29 @@ export const Home = ({ navigation }: PrimaryScreenProps<'Home'>) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
+        {!isEmailVerified && (
+          <Banner
+            visible={true}
+            actions={[
+              {
+                label: 'Bestätigungs-E-Mail anfordern',
+                onPress: () => {},
+              },
+              // {
+              //   label: 'E-Mail-Adresse bestätigen',
+              //   onPress: () => {},
+              // },
+            ]}
+            icon={({ size }) => (
+              <Icon name="email" size={size} color={colors.error} />
+            )}
+          >
+            Wenn du deine E-Mail-Adresse bestätigen möchtest, öffne bitte die
+            Bestätigungs-E-Mail mit dem Link (und Code) auf deinem Smartphone,
+            auf dem die App installiert ist, und nutze dazu eine E-Mail-App.
+          </Banner>
+        )}
+
         <View>
           <Text variant="headlineLarge" style={styles.bubatzeit}>
             BUBATZEIT

@@ -1,7 +1,15 @@
 import { openURL } from 'expo-linking';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Button, Card, Divider, List, Surface, Text } from 'react-native-paper';
+import {
+  Button,
+  Card,
+  Chip,
+  Divider,
+  List,
+  Surface,
+  Text,
+} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { styles } from './styles';
@@ -15,7 +23,6 @@ type Props = {
     address: {
       street: string;
       postalCode: string;
-      phoneNumber: string;
     };
     coordinates: {
       latitude: number;
@@ -31,9 +38,10 @@ type Props = {
       close: string;
     }[];
     profile: {
+      isEmailVerified: boolean;
       website: string;
       email: string;
-      phone: string;
+      phoneNumber: string;
     };
     groups: {
       telegram: string;
@@ -93,8 +101,8 @@ export default function ClubDetails({ club }: Props) {
             </Surface>
 
             <List.Item
-              title={profile.phone}
-              onPress={() => openURL(profile.phone)}
+              title={profile.phoneNumber}
+              onPress={() => openURL(profile.phoneNumber)}
               left={(props) => (
                 <List.Icon {...props} style={styles.listIcon} icon="phone" />
               )}
@@ -105,6 +113,17 @@ export default function ClubDetails({ club }: Props) {
               left={(props) => (
                 <List.Icon {...props} style={styles.listIcon} icon="email" />
               )}
+              right={(props) =>
+                profile.isEmailVerified ? (
+                  <Chip {...props} icon="email-check">
+                    Verified
+                  </Chip>
+                ) : (
+                  <Chip {...props} icon="email-send">
+                    Verify
+                  </Chip>
+                )
+              }
             />
             <List.Item
               title={profile.website}

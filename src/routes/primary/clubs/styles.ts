@@ -7,4 +7,12 @@ export const styles = StyleSheet.create({
   listHeader: {
     padding: 16,
   },
+  badges: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  space: {
+    justifyContent: 'space-between',
+  },
 });

@@ -21,9 +21,10 @@ const typeDefs = `#graphql
     close: String
   }
   type Profile {
+    isEmailVerified: Boolean,
     website: String
     email: String
-    phone: String
+    phoneNumber: String
   }
   type Groups {
     telegram: String
@@ -108,16 +109,16 @@ const clubs = [
       street: 'Marienstraße 67',
       city: 'Berlin',
       postalCode: '10117',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Green Leaf Lounge',
     description: 'Experience the best cannabis strains in central Berlin.',
     image: images[0],
     openingHours,
     profile: {
+      isEmailVerified: true,
       website: 'https://denistoledo.dev/',
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -134,7 +135,6 @@ const clubs = [
       street: 'Oranienstraße 190',
       city: 'Berlin',
       postalCode: '10999',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Kreuzberg Kush Corner',
     description:
@@ -142,9 +142,10 @@ const clubs = [
     image: images[1],
     openingHours,
     profile: {
+      isEmailVerified: true,
       website: 'https://denistoledo.dev/',
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -161,7 +162,6 @@ const clubs = [
       street: 'Kollwitzstraße 42',
       city: 'Berlin',
       postalCode: '10405',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Prenzlauer Heights Dispensary',
     description:
@@ -169,9 +169,10 @@ const clubs = [
     image: images[2],
     openingHours,
     profile: {
+      isEmailVerified: false,
       website: 'https://denistoledo.dev/',
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -188,7 +189,6 @@ const clubs = [
       street: 'Leipziger Platz 12',
       city: 'Berlin',
       postalCode: '10117',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'City Green Gardens',
     description:
@@ -196,9 +196,10 @@ const clubs = [
     image: images[3],
     openingHours,
     profile: {
+      isEmailVerified: false,
       website: 'https://denistoledo.dev/',
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -215,7 +216,6 @@ const clubs = [
       street: 'Warschauer Straße 33',
       city: 'Berlin',
       postalCode: '10243',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Friedrichshain Fields',
     description:
@@ -223,9 +223,10 @@ const clubs = [
     image: images[2],
     openingHours,
     profile: {
+      isEmailVerified: false,
       website: 'https://denistoledo.dev/',
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -242,7 +243,6 @@ const clubs = [
       street: 'Stralauer Allee 3',
       city: 'Berlin',
       postalCode: '10245',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'East Side Herbal Hub',
     description:
@@ -250,9 +250,10 @@ const clubs = [
     image: images[0],
     openingHours,
     profile: {
+      isEmailVerified: false,
       website: 'https://denistoledo.dev/',
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -269,7 +270,6 @@ const clubs = [
       street: 'Alt-Treptow 3',
       city: 'Berlin',
       postalCode: '12435',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Kreuzkölln Cannabis Corner',
     description:
@@ -277,9 +277,10 @@ const clubs = [
     image: images[3],
     openingHours,
     profile: {
+      isEmailVerified: false,
       website: 'https://denistoledo.dev/',
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -296,7 +297,6 @@ const clubs = [
       street: 'Danziger Straße 56',
       city: 'Berlin',
       postalCode: '10435',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Weißensee Weed Wonderland',
     description: 'Step into a wonderland of diverse weed options in Weißensee.',
@@ -304,8 +304,9 @@ const clubs = [
     openingHours,
     profile: {
       website: 'https://denistoledo.dev/',
+      isEmailVerified: false,
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -322,7 +323,6 @@ const clubs = [
       street: 'Marienfelder Allee 66',
       city: 'Berlin',
       postalCode: '12277',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Tempelhof THC Terrace',
     description: 'Relax and unwind at the terrace with a view in Tempelhof.',
@@ -330,6 +330,7 @@ const clubs = [
   {
     id: 10,
     coordinates: {
+      isEmailVerified: false,
       latitude: 52.509,
       longitude: 13.4395,
     },
@@ -337,7 +338,6 @@ const clubs = [
       street: 'Frankfurter Allee 77',
       city: 'Berlin',
       postalCode: '10247',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Gleisdreieck Greenhouse',
     description:
@@ -345,9 +345,10 @@ const clubs = [
     image: images[1],
     openingHours,
     profile: {
+      isEmailVerified: false,
       website: 'https://denistoledo.dev/',
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -364,7 +365,6 @@ const clubs = [
       street: 'Alexanderstraße 1',
       city: 'Berlin',
       postalCode: '10178',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Alexanderplatz Cannabis Corner',
     description: 'Explore a diverse selection of cannabis near Alexanderplatz.',
@@ -372,8 +372,9 @@ const clubs = [
     openingHours,
     profile: {
       website: 'https://denistoledo.dev/',
+      isEmailVerified: false,
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -390,7 +391,6 @@ const clubs = [
       street: 'Bergmannstraße 5',
       city: 'Berlin',
       postalCode: '10961',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Marijuana Mansion in Moabit',
     description:
@@ -398,9 +398,10 @@ const clubs = [
     image: images[3],
     openingHours,
     profile: {
+      isEmailVerified: false,
       website: 'https://denistoledo.dev/',
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -417,7 +418,6 @@ const clubs = [
       street: 'Karl-Marx-Allee 33',
       city: 'Berlin',
       postalCode: '10178',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Spree-side Sativa Spot',
     description: 'Enjoy Sativa strains by the Spree River in Berlin.',
@@ -425,8 +425,9 @@ const clubs = [
     openingHours,
     profile: {
       website: 'https://denistoledo.dev/',
+      isEmailVerified: false,
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -443,7 +444,6 @@ const clubs = [
       street: 'Unter den Linden 77',
       city: 'Berlin',
       postalCode: '10117',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Mauerpark Medley',
     description: 'A medley of cannabis options awaits you at Mauerpark.',
@@ -451,8 +451,9 @@ const clubs = [
     openingHours,
     profile: {
       website: 'https://denistoledo.dev/',
+      isEmailVerified: false,
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -469,7 +470,6 @@ const clubs = [
       street: 'Sonnenallee 33',
       city: 'Berlin',
       postalCode: '12045',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Neukölln Nugs Nook',
     description: 'Find your favorite nugs at the cozy Neukölln Nook.',
@@ -477,8 +477,9 @@ const clubs = [
     openingHours,
     profile: {
       website: 'https://denistoledo.dev/',
+      isEmailVerified: false,
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -495,7 +496,6 @@ const clubs = [
       street: 'Warschauer Straße 33',
       city: 'Berlin',
       postalCode: '10243',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Warschauer Weed Wharf',
     description: 'Dock into diverse weed options at the Warschauer Wharf.',
@@ -503,8 +503,9 @@ const clubs = [
     openingHours,
     profile: {
       website: 'https://denistoledo.dev/',
+      isEmailVerified: false,
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -521,7 +522,6 @@ const clubs = [
       street: 'Frankfurter Allee 77',
       city: 'Berlin',
       postalCode: '10247',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Tiergarten THC Terrace',
     description: 'Enjoy a terrace experience with THC near Tiergarten.',
@@ -529,8 +529,9 @@ const clubs = [
     openingHours,
     profile: {
       website: 'https://denistoledo.dev/',
+      isEmailVerified: false,
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -547,7 +548,6 @@ const clubs = [
       street: 'Invalidenstraße 33',
       city: 'Berlin',
       postalCode: '10115',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Potsdamer Platz Pot Palace',
     description: 'Discover a palace of pot varieties near Potsdamer Platz.',
@@ -555,8 +555,9 @@ const clubs = [
     openingHours,
     profile: {
       website: 'https://denistoledo.dev/',
+      isEmailVerified: false,
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -573,7 +574,6 @@ const clubs = [
       street: 'Bergmannstraße 5',
       city: 'Berlin',
       postalCode: '10961',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Kreuzberg Kief Kingdom',
     description: 'Immerse yourself in the kingdom of kief in Kreuzberg.',
@@ -581,8 +581,9 @@ const clubs = [
     openingHours,
     profile: {
       website: 'https://denistoledo.dev/',
+      isEmailVerified: false,
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -599,7 +600,6 @@ const clubs = [
       street: 'Karl-Liebknecht-Straße 33',
       city: 'Berlin',
       postalCode: '10178',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Mitte Marijuana Marketplace',
     description: 'Explore a marketplace of marijuana options in Berlin Mitte.',
@@ -607,8 +607,9 @@ const clubs = [
     openingHours,
     profile: {
       website: 'https://denistoledo.dev/',
+      isEmailVerified: true,
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -625,7 +626,6 @@ const clubs = [
       street: 'Danziger Straße 56',
       city: 'Berlin',
       postalCode: '10435',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Pankow Pot Paradise',
     description: 'Escape to a pot paradise in the lush greenery of Pankow.',
@@ -633,8 +633,9 @@ const clubs = [
     openingHours,
     profile: {
       website: 'https://denistoledo.dev/',
+      isEmailVerified: true,
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -651,7 +652,6 @@ const clubs = [
       street: 'Alt-Treptow 3',
       city: 'Berlin',
       postalCode: '12435',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Marienfelde Medicated Meadow',
     description: 'Relax in the medicated meadow of Marienfelde.',
@@ -659,8 +659,9 @@ const clubs = [
     openingHours,
     profile: {
       website: 'https://denistoledo.dev/',
+      isEmailVerified: true,
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -677,7 +678,6 @@ const clubs = [
       street: 'Leipziger Platz 12',
       city: 'Berlin',
       postalCode: '10117',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Checkpoint Charlie Cannabis Club',
     description:
@@ -685,9 +685,10 @@ const clubs = [
     image: images[1],
     openingHours,
     profile: {
+      isEmailVerified: true,
       website: 'https://denistoledo.dev/',
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',
@@ -704,16 +705,16 @@ const clubs = [
       street: 'Danziger Straße 56',
       city: 'Berlin',
       postalCode: '10435',
-      phoneNumber: '+49 30 1234 5678',
     },
     title: 'Weißensee Weed Wholesalers',
     description: 'Wholesale weed options available in Weißensee.',
     image: images[2],
     openingHours,
     profile: {
+      isEmailVerified: true,
       website: 'https://denistoledo.dev/',
       email: 'contato@denistoledo.com.br',
-      phone: '+4901744310644',
+      phoneNumber: '+4901744310644',
     },
     groups: {
       telegram: 'https://t.me/+tG_k3dM1xKxiODcy',

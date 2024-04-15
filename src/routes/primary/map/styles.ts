@@ -24,4 +24,12 @@ export const styles = StyleSheet.create({
   bottomSheet: {
     flex: 1,
   },
+  badges: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  space: {
+    justifyContent: 'space-between',
+  },
 });

@@ -2,12 +2,14 @@ import { gql, useQuery } from '@apollo/client';
 import { useRef, useState } from 'react';
 import { View, Dimensions } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Card } from 'react-native-paper';
+import { Card, Chip } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { styles } from './styles';
 import CardTitle from '../../../components/card-title';
 import WeedSvg from '../../../components/weed-svg';
+import { useTheme } from '../../../theme';
 import { ScreenProps as PrimaryScreenProps } from '../__layout/types';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
@@ -31,7 +33,6 @@ const GET_CLUBS = gql`
       address {
         street
         postalCode
-        phoneNumber
       }
       title
       description
@@ -43,10 +44,21 @@ const GET_CLUBS = gql`
         open
         close
       }
+      profile {
+        isEmailVerified
+        website
+        phoneNumber
+      }
+      groups {
+        telegram
+        whatsapp
+      }
     }
   }
 `;
+
 export const Map = ({ navigation }: PrimaryScreenProps<'Map'>) => {
+  const { colors } = useTheme();
   const { loading, error, data } = useQuery(GET_CLUBS);
 
   const carrouselRef = useRef(null);
@@ -60,14 +72,41 @@ export const Map = ({ navigation }: PrimaryScreenProps<'Map'>) => {
   };
 
   const _renderItem = ({ item }) => {
+    console.log('item', item);
     return (
       <Card key={item.id} onPress={() => onSelectClub(item.id)}>
         <CardTitle
           title={item.title}
-          subtitle={`${item.address.street}, ${item.address.postalCode}`}
+          subtitle={
+            item.address && `${item.address.street}, ${item.address.postalCode}`
+          }
           imageUri={item.image?.uri}
           showDots
         />
+        <Card.Content>
+          <View style={[styles.badges, styles.space]}>
+            {!item.profile?.isEmailVerified ? (
+              <Chip icon="email-remove" disabled>
+                Not Verified
+              </Chip>
+            ) : (
+              <>
+                <Chip icon="email-check">Verified</Chip>
+                <View style={styles.badges}>
+                  {item.profile?.phoneNumber && (
+                    <Icon name="phone" size={16} color={colors.primary} />
+                  )}
+                  {item.profile?.website && (
+                    <Icon name="web" size={16} color={colors.primary} />
+                  )}
+                  {item.groups && (
+                    <Icon name="chat" size={16} color={colors.primary} />
+                  )}
+                </View>
+              </>
+            )}
+          </View>
+        </Card.Content>
       </Card>
     );
   };
