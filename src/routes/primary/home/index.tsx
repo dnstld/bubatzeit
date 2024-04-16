@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import {
   Button,
@@ -7,6 +8,7 @@ import {
   IconButton,
   Switch,
   Banner,
+  Menu,
 } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -16,6 +18,7 @@ import CardTitle from '../../../components/card-title';
 import WeedSvg from '../../../components/weed-svg';
 import { useTheme } from '../../../theme';
 import { ScreenProps as PrimaryScreenProps } from '../__layout/types';
+import { TouchableOpacity } from '@gorhom/bottom-sheet';
 
 const isEmailVerified = false;
 
@@ -47,10 +50,48 @@ export const Home = ({ navigation }: PrimaryScreenProps<'Home'>) => {
     navigation.navigate('Profile', { screen: 'Club' });
   };
 
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+    closeMenu();
+  };
+
+  const [visible, setVisible] = useState(false);
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        {!isEmailVerified && (
+        <View style={{ alignItems: 'flex-end' }}>
+          <Menu
+            visible={visible}
+            onDismiss={closeMenu}
+            anchor={<IconButton icon="earth" onPress={openMenu} />}
+            overlayAccessibilityLabel="Close change language"
+          >
+            <Menu.Item
+              leadingIcon="redo"
+              onPress={() => changeLanguage('en')}
+              title="Ingles"
+            />
+            <Menu.Item
+              leadingIcon="redo"
+              onPress={() => changeLanguage('de')}
+              title="Deutch"
+            />
+            <Menu.Item
+              leadingIcon="redo"
+              onPress={() => changeLanguage('pt')}
+              title="Portuguese"
+            />
+          </Menu>
+        </View>
+
+        {isEmailVerified && (
           <Banner
             visible={true}
             actions={[
@@ -75,11 +116,9 @@ export const Home = ({ navigation }: PrimaryScreenProps<'Home'>) => {
 
         <View>
           <Text variant="headlineLarge" style={styles.bubatzeit}>
-            BUBATZEIT
+            {t('bubatzeit')}
           </Text>
-          <Text variant="headlineSmall">
-            Berlin modernstes Finder portal für Cannabis Social Clubs.
-          </Text>
+          <Text variant="headlineSmall">{t('description')}</Text>
           <View style={styles.description}>
             <WeedSvg map color={colors.primary} size={32} />
             <Text theme={{ colors: { onSurface: colors.primary } }}>
