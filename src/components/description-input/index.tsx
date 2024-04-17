@@ -1,4 +1,5 @@
 import React, { ComponentProps } from 'react';
+import { useTranslation } from 'react-i18next';
 import { TextInput } from 'react-native-paper';
 
 import { useTheme } from '../../theme';
@@ -9,12 +10,15 @@ export const DescriptionInput = ({
   testID = 'DescriptionInput',
   ...rest
 }: Props) => {
+  const { t } = useTranslation(undefined, {
+    keyPrefix: 'components.descriptionInput',
+  });
   const { colors } = useTheme();
 
   return (
     <TextInput
       testID={testID}
-      label="Vereinsbeschreibung"
+      label={t('label')}
       mode="outlined"
       right={
         rest.error && (

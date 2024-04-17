@@ -18,7 +18,6 @@ import CardTitle from '../../../components/card-title';
 import WeedSvg from '../../../components/weed-svg';
 import { useTheme } from '../../../theme';
 import { ScreenProps as PrimaryScreenProps } from '../__layout/types';
-import { TouchableOpacity } from '@gorhom/bottom-sheet';
 
 const isEmailVerified = false;
 

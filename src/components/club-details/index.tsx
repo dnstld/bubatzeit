@@ -1,4 +1,5 @@
 import { openURL } from 'expo-linking';
+import { useTranslation } from 'react-i18next';
 import { ScrollView, View } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import {
@@ -51,6 +52,10 @@ type Props = {
 };
 
 export default function ClubDetails({ club }: Props) {
+  const { t } = useTranslation(undefined, {
+    keyPrefix: 'components.clubDetails',
+  });
+
   const {
     title,
     address,
@@ -91,7 +96,7 @@ export default function ClubDetails({ club }: Props) {
             subtitle={
               address
                 ? `${address.street}, ${address.postalCode}`
-                : 'Digital Club'
+                : t('digitalClub')
             }
             imageUri={image.uri}
           />
@@ -116,11 +121,11 @@ export default function ClubDetails({ club }: Props) {
               right={(props) =>
                 profile.isEmailVerified ? (
                   <Chip {...props} icon="email-check">
-                    Verified
+                    {t('verified')}
                   </Chip>
                 ) : (
                   <Chip {...props} icon="email-send">
-                    Verify
+                    {t('verify')}
                   </Chip>
                 )
               }
@@ -136,7 +141,7 @@ export default function ClubDetails({ club }: Props) {
             <Divider style={styles.divider} />
 
             <Text variant="titleSmall" style={styles.title}>
-              Folge uns:
+              {t('followUs')}
             </Text>
             <View style={styles.socialContainer}>
               <Button
@@ -145,7 +150,7 @@ export default function ClubDetails({ club }: Props) {
                 buttonColor="#515BD4"
                 onPress={() => openURL(groups.telegram)}
               >
-                Instagram
+                {t('instagram')}
               </Button>
 
               <Button
@@ -154,14 +159,14 @@ export default function ClubDetails({ club }: Props) {
                 buttonColor="#0866ff"
                 onPress={() => openURL('https://www.facebook.com/')}
               >
-                Facefook
+                {t('facebook')}
               </Button>
             </View>
 
             <Divider style={styles.divider} />
 
             <Text variant="titleSmall" style={styles.title}>
-              Trete unserer Gruppe bei:
+              {t('joinUs')}
             </Text>
             <View style={styles.socialContainer}>
               <Button
@@ -170,7 +175,7 @@ export default function ClubDetails({ club }: Props) {
                 buttonColor="#3b5998"
                 onPress={() => openURL(groups.telegram)}
               >
-                Telegram
+                {t('telegram')}
               </Button>
               <Button
                 icon={() => <Icon name="whatsapp" size={24} color="#ffffff" />}
@@ -178,14 +183,14 @@ export default function ClubDetails({ club }: Props) {
                 buttonColor="#25d366"
                 onPress={() => openURL(groups.whatsapp)}
               >
-                Whatsapp
+                {t('whatsapp')}
               </Button>
             </View>
 
             <Divider style={styles.divider} />
 
             <Text variant="titleSmall" style={styles.title}>
-              Öffnungszeiten:
+              {t('openingHours')}
             </Text>
             <View>
               {openingHours.map((hour, index) => (

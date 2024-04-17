@@ -1,4 +1,45 @@
 {
   "bubatzeit": "BUBATZEIT",
-  "description": "Berlin's most modern finder portal for cannabis social clubs."
+  "description": "Berlin's most modern finder portal for cannabis social clubs.",
+  "components": {
+    "clubDetails": {
+      "digitalClub": "Digital Club",
+      "verified": "Verified",
+      "verify": "Verify",
+      "followUs": "Follow us",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "groups": "Join our group:",
+      "telegram": "Telegram",
+      "whatsapp": "WhatsApp",
+      "openingHours": "Opening hours"
+    },
+    "clubNameInput": {
+      "label": "Club name"
+    },
+    "descriptionInput": {
+      "label": "Description"
+    },
+    "emailInput": {
+      "label": "Email"
+    },
+    "passwordInput": {
+      "label": "Password"
+    },
+    "newPasswordInput": {
+      "score": {
+        "title": "Password strength",
+        "veryWeek": "Gorilla Glue",
+        "week": "Girl Scout Cookies",
+        "medium": "Bruce Banner",
+        "strong": "Strawberry Banana",
+        "veryStrong": "Godfather OG"
+      },
+      "strength": {
+        "labe": "Password strength:",
+        "title": "Please create a strong password:",
+        "description": "At least 8 characters long. Use a mix of character types."
+      }
+    }
+  }
 }

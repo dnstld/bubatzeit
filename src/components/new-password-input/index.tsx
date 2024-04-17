@@ -1,5 +1,6 @@
 import { zxcvbn, ZxcvbnResult } from '@zxcvbn-ts/core';
 import React, { ComponentProps, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { ProgressBar, Text } from 'react-native-paper';
 
@@ -20,6 +21,9 @@ export const NewPasswordInput = ({
   onError,
   ...rest
 }: Props) => {
+  const { t } = useTranslation(undefined, {
+    keyPrefix: 'components.newPasswordInput',
+  });
   const { colors } = useTheme();
   const [zxcvbnResult, setZxcvbnResult] = useState<ZxcvbnResult>({} as any);
 
@@ -38,23 +42,23 @@ export const NewPasswordInput = ({
     const scoreMap: { [key: number]: { color: string; text: string } } = {
       0: {
         color: colors.onBackground,
-        text: 'Gorilla Glue',
+        text: t('veryWeak'),
       },
       1: {
         color: colors.error,
-        text: 'Girl Scout Cookies',
+        text: t('weak'),
       },
       2: {
         color: colors.error,
-        text: 'Bruce Banner',
+        text: t('medium'),
       },
       3: {
         color: colors.primary,
-        text: 'Strawberry Banana',
+        text: t('strong'),
       },
       4: {
         color: colors.primary,
-        text: 'Godfather OG',
+        text: t('veryStrong'),
       },
     };
     return scoreMap[score];
@@ -84,11 +88,8 @@ export const NewPasswordInput = ({
       </View>
       {!zxcvbnResult.score ? (
         <View>
-          <Text>Bitte erstellen Sie ein sicheres Passwort:</Text>
-          <Text>
-            Mindestens 8 Zeichen lang. Verwenden Sie eine Mischung aus
-            Zeichentypen.
-          </Text>
+          <Text>{t('strength.title')}</Text>
+          <Text>{t('strength.description')}</Text>
         </View>
       ) : (
         <View style={styles.score}>
@@ -97,7 +98,7 @@ export const NewPasswordInput = ({
             color={getPasswordScore(zxcvbnResult.score).color}
           />
           <Text>
-            Passwortstärke: {getPasswordScore(zxcvbnResult.score).text}
+            {t('strength.label')} {getPasswordScore(zxcvbnResult.score).text}
           </Text>
         </View>
       )}

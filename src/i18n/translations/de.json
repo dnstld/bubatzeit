@@ -1,4 +1,44 @@
 {
   "bubatzeit": "BUBATZEIT",
-  "description": "Berlin modernstes Finder portal für Cannabis Social Clubs."
+  "description": "Berlin modernstes Finder portal für Cannabis Social Clubs.",
+  "components": {
+    "clubDetails": {
+      "digitalClub": "Digitaler Club",
+      "verified": "Verifiziert",
+      "verify": "Verifizieren",
+      "followUs": "Folge uns",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "groups": "Trete unserer Gruppe bei:",
+      "telegram": "Telegram",
+      "whatsapp": "WhatsApp",
+      "openingHours": "Öffnungszeiten",
+      "clubNameInput": {
+        "label": "Club Name"
+      },
+      "descriptionInput": {
+        "label": "Vereinsbeschreibung"
+      },
+      "emailInput": {
+        "label": "E-Mail"
+      },
+      "passwordInput": {
+        "label": "Passwort"
+      },
+      "newPasswordInput": {
+        "score": {
+          "veryWeek": "Gorilla Glue",
+          "week": "Girl Scout Cookies",
+          "medium": "Bruce Banner",
+          "strong": "Strawberry Banana",
+          "veryStrong": "Godfather OG"
+        },
+        "strength": {
+          "labe": "Passwortstärke:",
+          "title": "Bitte erstellen Sie ein sicheres Passwort:",
+          "description": "Mindestens 8 Zeichen lang. Verwenden Sie eine Mischung aus Zeichentypen."
+        }
+      }
+    }
+  }
 }

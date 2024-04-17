@@ -1,4 +1,44 @@
 {
   "bubatzeit": "BUBATZEIT",
-  "description": "O portal de localização mais moderno de Berlim para clubes sociais de cannabis."
+  "description": "O portal de localização mais moderno de Berlim para clubes sociais de cannabis.",
+  "components": {
+    "clubDetails": {
+      "digitalClub": "Clube digital",
+      "verified": "Verificado",
+      "verify": "Verificar",
+      "followUs": "Siga-nos",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "groups": "Participe do nosso grupo:",
+      "telegram": "Telegram",
+      "whatsapp": "WhatsApp",
+      "openingHours": "Horário de funcionamento",
+      "clubNameInput": {
+        "label": "Nome do clube"
+      },
+      "descriptionInput": {
+        "label": "Descrição"
+      },
+      "emailInput": {
+        "label": "E-mail"
+      },
+      "passwordInput": {
+        "label": "Senha"
+      },
+      "newPasswordInput": {
+        "score": {
+          "veryWeek": "Gorilla Glue",
+          "week": "Girl Scout Cookies",
+          "medium": "Bruce Banner",
+          "strong": "Strawberry Banana",
+          "veryStrong": "Godfather OG"
+        },
+        "strength": {
+          "labe": "Força:",
+          "title": "Por favor, crie uma senha forte:",
+          "description": "Pelo menos 8 caracteres. Use uma mistura de caracteres especiais."
+        }
+      }
+    }
+  }
 }

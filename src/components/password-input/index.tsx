@@ -1,15 +1,19 @@
 import React, { ComponentProps, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { TextInput } from 'react-native-paper';
 
 type Props = ComponentProps<typeof TextInput>;
 
 export const PasswordInput = ({ testID = 'PasswordInput', ...rest }: Props) => {
+  const { t } = useTranslation(undefined, {
+    keyPrefix: 'components.passwordInput',
+  });
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   return (
     <TextInput
       testID={testID}
-      label="Passwort"
+      label={t('label')}
       mode="outlined"
       right={
         <TextInput.Icon
